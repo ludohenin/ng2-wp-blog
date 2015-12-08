@@ -1,0 +1,7 @@
+<article *ng-if="post">
+  <header>
+    <h3>{{ post.title.rendered }}</h3>
+  </header>
+
+  <section [inner-html]="post.content.rendered" prism></section>
+</article>

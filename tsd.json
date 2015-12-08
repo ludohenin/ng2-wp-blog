@@ -1,0 +1,60 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "tools/typings/tsd",
+  "bundle": "tools/typings/tsd/tsd.d.ts",
+  "installed": {
+    "systemjs/systemjs.d.ts": {
+      "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"
+    },
+    "node/node.d.ts": {
+      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+    },
+    "gulp/gulp.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "q/Q.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "orchestrator/orchestrator.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "gulp-shell/gulp-shell.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "mime/mime.d.ts": {
+      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+    },
+    "express/express.d.ts": {
+      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+    },
+    "del/del.d.ts": {
+      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+    },
+    "glob/glob.d.ts": {
+      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+    },
+    "minimatch/minimatch.d.ts": {
+      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+    },
+    "async/async.d.ts": {
+      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+    },
+    "qs/qs.d.ts": {
+      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+    },
+    "moment/moment.d.ts": {
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
+    }
+  }
+}

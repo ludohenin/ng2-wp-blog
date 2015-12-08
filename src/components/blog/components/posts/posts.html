@@ -1,0 +1,9 @@
+<article class="section" *ng-for="#post of posts">
+  <header>
+    <h4><a [router-link]="['../PostCmp', { id: post.id }]">{{ post.title.rendered }}</a></h4>
+  </header>
+
+  <section [inner-html]="post.excerpt.rendered"></section>
+
+  <div class="divider"></div>
+</article>
