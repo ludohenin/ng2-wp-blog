@@ -6,7 +6,7 @@ import {NavbarCmp} from './components/navbar/navbar';
 import {PostCmp} from './components/post/post';
 import {PostsCmp} from './components/posts/posts';
 
-import {SERVICE_PROVIDERS, WpService, PostModel} from './services/services';
+import {SERVICE_PROVIDERS, WpService, PostModel, RootModel} from './services/services';
 import {BLOG_DIRECTIVES} from './directives/directives';
 
 
@@ -23,10 +23,11 @@ import {BLOG_DIRECTIVES} from './directives/directives';
   { path: '/posts/:id/', component: PostCmp, as: 'PostCmp' }
 ])
 export class BlogCmp {
-  site = {name: ''};
+  site: RootModel;
   posts: PostModel[];
-  constructor(public wp: WpService, public router: Router) {
-    this.wp.root.get().subscribe(res => this.site = res);
+  constructor(public wp: WpService, public router: Router, root: RootModel) {
+    this.site = root;
+    this.site.get();
     this.wp.posts.initialize().subscribe(res => this.posts);
     console.log(router);
     router.subscribe((r => console.log(r)));

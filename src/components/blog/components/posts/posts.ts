@@ -14,6 +14,6 @@ import {WpService, PostModel} from '../../services/services';
 export class PostsCmp {
   posts: PostModel[];
   constructor(public wp: WpService) {
-    this.wp.posts.getPage().subscribe(post => this.posts = post);
+    this.wp.posts.getPage(1).subscribe(post => this.posts = post);
   }
 }

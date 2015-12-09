@@ -26,7 +26,7 @@ gulp.task('postinstall', done =>
 // Build dev.
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
-              'tslint',
+              // 'tslint',
               'build.sass.dev',
               'build.images.dev',
               'build.js.dev',

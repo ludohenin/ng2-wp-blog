@@ -1,6 +1,6 @@
-import {WP_SERVICE_PROVIDERS} from './wp_service/wp_service';
+import {WP_SERVICE_PROVIDERS} from './wp/wp';
 
-export * from './wp_service/wp_service';
+export * from './wp/wp';
 
 export const SERVICE_PROVIDERS = [
   WP_SERVICE_PROVIDERS

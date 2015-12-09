@@ -9,7 +9,7 @@ WIP
 ├── assets
 │   ├── main.css
 │   ├── prism.css
-│   └── prism.js
+│   └── prism.min.js
 ├── bootstrap.ts
 ├── components
 │   ├── app
@@ -23,11 +23,6 @@ WIP
 │       ├── blog.ts
 │       ├── blog_spec.ts
 │       ├── components
-│       │   ├── home
-│       │   │   ├── home.css
-│       │   │   ├── home.html
-│       │   │   ├── home.ts
-│       │   │   └── home_spec.ts
 │       │   ├── navbar
 │       │   │   ├── navbar.css
 │       │   │   ├── navbar.html
@@ -49,12 +44,11 @@ WIP
 │       ├── sample.config.ts
 │       └── services
 │           ├── services.ts
-│           └── wp_service
-│               ├── models
-│               │   ├── posts.ts
-│               │   └── root.ts
-│               ├── wp_api.ts
-│               ├── wp_service.ts
-│               └── wp_service_spec.ts
+│           └── wp
+│               ├── posts.ts
+│               ├── root.ts
+│               ├── wp.ts
+│               ├── wp_collection.ts
+│               └── xhr.ts
 └── index.html
 ```
