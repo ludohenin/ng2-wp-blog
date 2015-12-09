@@ -1,4 +1,4 @@
-import {EventEmitter, Observable, Injectable} from 'angular2/angular2';
+import {EventEmitter, Injectable} from 'angular2/angular2';
 import {ApiService} from './xhr';
 import {WpCollection, WpModel} from './wp_collection';
 
@@ -29,16 +29,16 @@ export class PostModel extends WpModel {
 
 
 @Injectable()
-export class PostsCollection<PostModel> extends WpCollection {
+export class PostsCollection extends WpCollection<PostModel> {
   constructor(public api: ApiService) {
+    super(api);
     this.urlRoot = 'https://3dots.io/wp-blog/wp-json/wp/v2';
     this.url = '/posts';
     this.modelProviders = [PostModel];
     this.modelToken = PostModel;
-    super(api);
   }
-  initialize(): Observable<PostModel[]> {
-    let event = new EventEmitter(true);
+  initialize(): EventEmitter<PostModel[]> {
+    let event = new EventEmitter();
     // this.getPage(1).subscribe(res => {
     //   // TODO: move header names to config.
     //   this.total = parseInt(this.response.headers.get('x-wp-total'));

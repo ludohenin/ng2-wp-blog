@@ -1,5 +1,5 @@
-import {EventEmitter, Injectable, Observable, provide} from 'angular2/angular2';
-import {Http, Request, RequestMethods, RequestOptions, RequestOptionsArgs, Response} from 'angular2/http';
+import {EventEmitter, Injectable, provide} from 'angular2/angular2';
+import {Http, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response} from 'angular2/http';
 import {extend} from 'lodash';
 
 
@@ -11,7 +11,7 @@ export function makeRequestOtions(opts: RequestOptions|RequestOptionsArgs): Requ
     options = opts;
   }
 
-  if (!options.method) { options.method = RequestMethods.Get; }
+  if (!options.method) { options.method = RequestMethod.Get; }
 
   return options;
 }
@@ -20,8 +20,10 @@ export function makeRequestOtions(opts: RequestOptions|RequestOptionsArgs): Requ
 export class XhrService {
   constructor(private _http: Http) {
   }
-  request(request: Request) {
-    return this._http.request(request);
+  request(request: Request): EventEmitter<any> {
+    let _request = new EventEmitter();
+    this._http.request(request).subscribe(res => _request.next(res));
+    return _request;
   }
 }
 
@@ -41,10 +43,10 @@ export class CacheService {
 @Injectable()
 export class QueueService {
   private _queue = new Map();
-  get(key: Request): Observable<any> {
-    return (<Observable<any>>this._queue.get(key.url));
+  get(key: Request): EventEmitter<any> {
+    return (<EventEmitter<any>>this._queue.get(key.url));
   }
-  set(key: Request, value: Observable<any>): QueueService {
+  set(key: Request, value: EventEmitter<any>): QueueService {
     this._queue.set(key.url, value);
     return this;
   }
@@ -77,7 +79,7 @@ export class ApiService {
               private _cache: CacheService,
               private _queue: QueueService) {
   }
-  request<T>(reqOpts: RequestOptions|RequestOptionsArgs, conf?: IApiServiceConfig): Observable<T> {
+  request<T>(reqOpts: RequestOptions|RequestOptionsArgs, conf?: IApiServiceConfig): EventEmitter<T> {
     let config = (<ApiServiceConfig>extend({}, this.config, conf));
     let requestOptions = makeRequestOtions(reqOpts);
     let request = new Request(requestOptions);

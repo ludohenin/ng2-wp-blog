@@ -35,19 +35,27 @@ export const VERSION_NODE         = '4.0.0';
 
 
 // List all NPM dependencies not loaded asynchrounously with SystemJS script loader.
-const NPM_DEPENDENCIES = [
+let NPM_DEPENDENCIES = [
   { src: 'es6-shim/es6-shim.min.js',    inject: 'shims', dest: LIB_DEST },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: LIB_DEST },
   { src: 'systemjs/dist/system.src.js', inject: 'shims', dest: LIB_DEST },
-
-  { src: 'angular2/bundles/angular2.min.js', inject: 'libs', dest: LIB_DEST },
-  { src: 'angular2/bundles/router.min.js',   inject: 'libs', dest: LIB_DEST },
-  { src: 'angular2/bundles/http.min.js',     inject: 'libs', dest: LIB_DEST },
 
   { src: 'materialize-css/dist/css/materialize.min.css', inject: true, dest: CSS_DEST },
 
   { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
   { src: 'node_modules/materialize-css/dist/font/**/*', dest: FONTS_DEST }
+];
+
+const NPM_DEPENDENCIES_DEV = [
+  { src: 'angular2/bundles/angular2.dev.js', inject: 'libs', dest: LIB_DEST },
+  { src: 'angular2/bundles/router.dev.js',   inject: 'libs', dest: LIB_DEST },
+  { src: 'angular2/bundles/http.dev.js',     inject: 'libs', dest: LIB_DEST },
+];
+
+const NPM_DEPENDENCIES_PROD = [
+  { src: 'angular2/bundles/angular2.min.js', inject: 'libs', dest: LIB_DEST },
+  { src: 'angular2/bundles/router.min.js',   inject: 'libs', dest: LIB_DEST },
+  { src: 'angular2/bundles/http.min.js',     inject: 'libs', dest: LIB_DEST },
 ];
 
 // List all app dependencies not loaded asynchrounously with SystemJS script loader.
@@ -57,6 +65,7 @@ export const APP_ASSETS = [
   { src: `${ASSETS_SRC}/main.css`,  inject: true, dest: CSS_DEST }
 ];
 
+NPM_DEPENDENCIES = NPM_DEPENDENCIES.concat('dev' === ENV ? NPM_DEPENDENCIES_DEV : NPM_DEPENDENCIES_PROD);
 NPM_DEPENDENCIES
   .filter(d => !/\*/.test(d.src))
   .forEach(d => d.src = require.resolve(d.src));
@@ -73,6 +82,7 @@ const SYSTEM_CONFIG_DEV = {
   paths: {
     'bootstrap': `${APP_ROOT}bootstrap`,
     'lodash': `${APP_BASE}node_modules/lodash/index`,
+    'rxjs/*': `${APP_BASE}node_modules/@reactivex/rxjs/dist/cjs/*`,
     '*': `${APP_BASE}node_modules/*`
   }
 };
@@ -85,7 +95,7 @@ export const SYSTEM_CONFIG_BUILDER = {
     'angular2/*': 'node_modules/angular2/*',
     'lodash': 'node_modules/lodash/index',
     'urijs/*': 'node_modules/urijs/*',
-    '@reactivex/*': 'node_modules/@reactivex/*'
+    'rxjs/*': 'node_modules/@reactivex/dist/cjs'
   }
 };
 

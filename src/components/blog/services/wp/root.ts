@@ -1,4 +1,4 @@
-import {EventEmitter, Observable, Injectable} from 'angular2/angular2';
+import {Injectable} from 'angular2/angular2';
 import {Response} from 'angular2/http';
 import {merge} from 'lodash';
 import {ApiService} from './xhr';
