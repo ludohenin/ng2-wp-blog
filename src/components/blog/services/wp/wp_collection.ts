@@ -3,6 +3,12 @@ import {Response, URLSearchParams} from 'angular2/http';
 import {find, merge} from 'lodash';
 import {ApiService} from './xhr';
 
+@Injectable()
+export class WpCollectionConfig {
+  urlRoot: string = '';
+  namespace: string = '';
+}
+
 export class WpModel {
   id: number;
   set(json: any): WpModel {
@@ -11,15 +17,18 @@ export class WpModel {
   }
 }
 
+// TODO: Validate generic type.
 @Injectable()
 export class WpCollection<T extends WpModel> extends Array {
   urlRoot: string;
+  namespace: string;
   url: string;
   modelProviders: any[];
   modelToken: any;
   private _injector: Injector;
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public config: WpCollectionConfig) {
     super();
+    merge(this, config);
   }
   findOneById(id: number): T {
     return find(this, {id});
@@ -36,7 +45,8 @@ export class WpCollection<T extends WpModel> extends Array {
       let searchParams = new URLSearchParams();
       searchParams.set('_embed', '1');
       this.api.request({
-        url: `${this.urlRoot}${this.url}/${id}`,
+        // TODO: Refactor.
+        url: `${this.urlRoot}${this.namespace}${this.url}/${id}`,
         search: searchParams
       }, {cache: true})
         .subscribe((res: Response) => {
@@ -58,7 +68,8 @@ export class WpCollection<T extends WpModel> extends Array {
     let request = new EventEmitter();
 
     this.api.request({
-      url: `${this.urlRoot}${this.url}`,
+      // TODO: Refactor.
+      url: `${this.urlRoot}${this.namespace}${this.url}`,
       search: searchParams
     }, {cache: true}).subscribe((res: Response) => {
       let collection: any[] = res.json();
@@ -95,5 +106,6 @@ export class WpCollection<T extends WpModel> extends Array {
 
 export const WP_COLLECTION_PROVIDERS = [
   WpCollection,
-  WpModel
+  WpModel,
+  WpCollectionConfig
 ];

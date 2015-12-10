@@ -1,9 +1,9 @@
-<article class="section" *ng-for="#post of posts">
+<article class="section" *ngFor="#post of posts">
   <header>
-    <h4><a [router-link]="['../PostCmp', { id: post.id }]">{{ post.title.rendered }}</a></h4>
+    <h4><a [routerLink]="['../PostCmp', { id: post.id }]">{{ post.title.rendered }}</a></h4>
   </header>
 
-  <section [inner-html]="post.excerpt.rendered"></section>
+  <section [innerHtml]="post.excerpt.rendered"></section>
 
   <div class="divider"></div>
 </article>

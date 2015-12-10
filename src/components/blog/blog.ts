@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from 'angular2/angular2';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {NavbarCmp} from './components/navbar/navbar';
@@ -9,10 +9,18 @@ import {PostsCmp} from './components/posts/posts';
 import {SERVICE_PROVIDERS, WpService, PostModel, RootModel} from './services/services';
 import {BLOG_DIRECTIVES} from './directives/directives';
 
+import {BLOG_CONFIG_PROVIDERS, Config} from './config';
+
+// TODO: Order is important here.
+export const BLOG_PROVIDERS = [
+  HTTP_PROVIDERS,
+  SERVICE_PROVIDERS,
+  BLOG_CONFIG_PROVIDERS
+];
 
 @Component({
   selector: 'blog',
-  viewProviders: [HTTP_PROVIDERS, SERVICE_PROVIDERS],
+  providers: [BLOG_PROVIDERS],
   templateUrl: './components/blog/blog.html',
   styleUrls: ['./components/blog/blog.css'],
   encapsulation: ViewEncapsulation.None,
@@ -25,11 +33,10 @@ import {BLOG_DIRECTIVES} from './directives/directives';
 export class BlogCmp {
   site: RootModel;
   posts: PostModel[];
-  constructor(public wp: WpService, public router: Router, root: RootModel) {
+  disqusSrc: string;
+  constructor(public wp: WpService, public config: Config, root: RootModel) {
     this.site = root;
     this.site.get();
     this.wp.posts.initialize().subscribe(res => this.posts);
-    console.log(router);
-    router.subscribe((r => console.log(r)));
   }
 }

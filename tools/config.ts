@@ -5,6 +5,7 @@ import {argv} from 'yargs';
 // --------------
 // Configuration.
 export const ENV                  = argv['env']         || 'dev';
+export const APP_ENV              = argv['app-env']     || ENV;
 export const DEST                 = argv['dest']        || ENV;
 export const DEBUG                = argv['debug']       || false;
 export const PORT                 = argv['port']        || 5555;
@@ -34,9 +35,14 @@ export const VERSION_NPM          = '3.0.0';
 export const VERSION_NODE         = '4.0.0';
 
 
+const DISQUS_SRC_DEV = 'https://3dotsblogtest.disqus.com/embed.js';
+const DISQUS_SRC_PROD = 'https://3dotsblog.disqus.com/embed.js';
+export const DISQUS_SRC = 'dev' === ENV ? DISQUS_SRC_DEV : DISQUS_SRC_PROD;
+
 // List all NPM dependencies not loaded asynchrounously with SystemJS script loader.
 let NPM_DEPENDENCIES = [
   { src: 'es6-shim/es6-shim.min.js',    inject: 'shims', dest: LIB_DEST },
+  { src: 'es6-shim/es6-shim.map', dest: LIB_DEST },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: LIB_DEST },
   { src: 'systemjs/dist/system.src.js', inject: 'shims', dest: LIB_DEST },
 
@@ -82,7 +88,6 @@ const SYSTEM_CONFIG_DEV = {
   paths: {
     'bootstrap': `${APP_ROOT}bootstrap`,
     'lodash': `${APP_BASE}node_modules/lodash/index`,
-    'rxjs/*': `${APP_BASE}node_modules/@reactivex/rxjs/dist/cjs/*`,
     '*': `${APP_BASE}node_modules/*`
   }
 };
@@ -93,9 +98,9 @@ export const SYSTEM_CONFIG_BUILDER = {
   paths: {
     '*': `${TMP_DIR}/*`,
     'angular2/*': 'node_modules/angular2/*',
+    'rxjs/*': 'node_modules/rxjs/*',
     'lodash': 'node_modules/lodash/index',
-    'urijs/*': 'node_modules/urijs/*',
-    'rxjs/*': 'node_modules/@reactivex/dist/cjs'
+    'urijs/*': 'node_modules/urijs/*'
   }
 };
 

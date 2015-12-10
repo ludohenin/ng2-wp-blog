@@ -3,6 +3,7 @@ import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {WpService, PostModel} from '../../services/services';
 import {BLOG_DIRECTIVES} from '../../directives/directives';
+import {DisqusCmp} from '../disqus/disqus';
 
 @Component({
   selector: 'post',
@@ -10,7 +11,7 @@ import {BLOG_DIRECTIVES} from '../../directives/directives';
   templateUrl: './components/blog/components/post/post.html',
   styleUrls: ['./components/blog/components/post/post.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, DisqusCmp]
 })
 export class PostCmp {
   post: PostModel;

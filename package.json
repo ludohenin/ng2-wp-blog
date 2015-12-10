@@ -10,10 +10,10 @@
     "build.dev.watch": "gulp build.dev.watch",
     "serve.dev": "gulp serve --env dev",
 
-    "build.preprod": "gulp build.prod --env prod --dest preprod",
+    "build.preprod": "gulp build.prod --env prod --app-env dev --dest preprod",
     "serve.preprod": "http-server ./dist/preprod -p 5556 -o",
-
-    "build.stage": "gulp build.prod --env prod --dest stage --base /blog_stage/",
+    
+    "build.stage": "gulp build.prod --env prod --app-env dev --dest stage --base /blog_stage/",
     "stage": "rsync -r --verbose ./dist/stage/ root@3dots.io:/var/www/blog_stage/",
 
     "build.prod": "gulp build.prod --env prod --dest prod --base /blog/",
@@ -21,7 +21,6 @@
 
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",
-
     "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs",
     "gulp": "gulp",
     "karma": "karma",
@@ -37,7 +36,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "dependencies": {
-    "angular2": "2.0.0-alpha.50",
+    "angular2": "2.0.0-alpha.52",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
@@ -51,7 +50,6 @@
     "urijs": "^1.17.0"
   },
   "devDependencies": {
-    "@reactivex/rxjs": "^5.0.0-alpha.14",
     "async": "^1.4.2",
     "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
@@ -87,6 +85,7 @@
     "reflect-metadata": "^0.1.2",
     "rimraf": "^2.4.3",
     "run-sequence": "^1.1.0",
+    "rxjs": "^5.0.0-alpha.14",
     "semver": "^5.0.3",
     "serve-static": "^1.9.2",
     "slash": "~1.0.0",

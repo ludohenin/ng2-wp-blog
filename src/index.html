@@ -19,6 +19,9 @@
   <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
   <!-- libs:js -->
   <!-- endinject -->
+
+  <script src="<%= DISQUS_SRC %>"></script>
+  
   <script>
     System.import('bootstrap')
       .catch(function (e) {

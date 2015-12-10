@@ -1,10 +1,11 @@
 import {Injectable} from 'angular2/angular2';
 
 export * from './xhr';
+export * from './wp_collection';
 export * from './root';
 export * from './posts';
 
-import {POSTS_PROVIDERS, PostsCollection, PostModel} from './posts';
+import {POSTS_PROVIDERS, PostsCollection} from './posts';
 import {ROOT_PROVIDERS, RootModel} from './root';
 import {WP_COLLECTION_PROVIDERS} from './wp_collection';
 import {XHR_SERVICE_PROVIDERS} from './xhr';
@@ -13,7 +14,7 @@ import {XHR_SERVICE_PROVIDERS} from './xhr';
 export class WpService {
   namespace: string;
   constructor(public root: RootModel,
-              public posts: PostsCollection<PostModel>) {
+              public posts: PostsCollection) {
   }
 }
 

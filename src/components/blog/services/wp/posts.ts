@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from 'angular2/angular2';
 import {ApiService} from './xhr';
-import {WpCollection, WpModel} from './wp_collection';
+import {WpCollection, WpModel, WpCollectionConfig} from './wp_collection';
 
 export class PostModel extends WpModel {
   id: number;
@@ -30,9 +30,8 @@ export class PostModel extends WpModel {
 
 @Injectable()
 export class PostsCollection extends WpCollection<PostModel> {
-  constructor(public api: ApiService) {
-    super(api);
-    this.urlRoot = 'https://3dots.io/wp-blog/wp-json/wp/v2';
+  constructor(public api: ApiService, public config: WpCollectionConfig) {
+    super(api, config);
     this.url = '/posts';
     this.modelProviders = [PostModel];
     this.modelToken = PostModel;
