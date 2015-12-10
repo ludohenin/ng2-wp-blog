@@ -1,27 +1,30 @@
-import {Injectable} from 'angular2/angular2';
-import {Response} from 'angular2/http';
+import {EventEmitter, Injectable} from 'angular2/angular2';
 import {merge} from 'lodash';
 import {ApiService} from './xhr';
+import {WpModel, WpResourceConfig} from './wp_resource';
 
 @Injectable()
-export class RootModel {
+export class RootModel extends WpModel {
   _links: any;
   authentication: any[];
   description: string;
   name: string;
   namespaces: string[];
   routes: any;
-  url: string;
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public config: WpResourceConfig) {
+    super(api, config);
   }
-  get(): RootModel {
-    let request = this.api.request({
-      url: 'https://3dots.io/wp-blog/wp-json'
-    }, { cache: true });
+  // Override the default Method as we want the api root (discovery endpoint).
+  get(): EventEmitter {
+    let request = new EventEmitter ();
+    this.api.request({url: this.urlRoot}, {cache: true})
+      .subscribe((res: Response) => {
+        let model = res.json();
+        merge(this, model);
+        request.next(this);
+      });
 
-    request.subscribe((res: Response) => merge(this, res.json()));
-
-    return this;
+    return request;
   }
 }
 

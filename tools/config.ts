@@ -35,12 +35,8 @@ export const VERSION_NPM          = '3.0.0';
 export const VERSION_NODE         = '4.0.0';
 
 
-const DISQUS_SRC_DEV = 'https://3dotsblogtest.disqus.com/embed.js';
-const DISQUS_SRC_PROD = 'https://3dotsblog.disqus.com/embed.js';
-export const DISQUS_SRC = 'dev' === ENV ? DISQUS_SRC_DEV : DISQUS_SRC_PROD;
-
 // List all NPM dependencies not loaded asynchrounously with SystemJS script loader.
-let NPM_DEPENDENCIES = [
+const NPM_DEPENDENCIES_COMMON = [
   { src: 'es6-shim/es6-shim.min.js',    inject: 'shims', dest: LIB_DEST },
   { src: 'es6-shim/es6-shim.map', dest: LIB_DEST },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: LIB_DEST },
@@ -71,7 +67,7 @@ export const APP_ASSETS = [
   { src: `${ASSETS_SRC}/main.css`,  inject: true, dest: CSS_DEST }
 ];
 
-NPM_DEPENDENCIES = NPM_DEPENDENCIES.concat('dev' === ENV ? NPM_DEPENDENCIES_DEV : NPM_DEPENDENCIES_PROD);
+const NPM_DEPENDENCIES = NPM_DEPENDENCIES_COMMON.concat('dev' === ENV ? NPM_DEPENDENCIES_DEV : NPM_DEPENDENCIES_PROD);
 NPM_DEPENDENCIES
   .filter(d => !/\*/.test(d.src))
   .forEach(d => d.src = require.resolve(d.src));
@@ -81,12 +77,28 @@ export const DEPENDENCIES = NPM_DEPENDENCIES.concat(APP_ASSETS);
 
 
 // ----------------
+// NG2 App Configuration (Injected into /{APP_SRC}/config.ts).
+
+const APP_CONFIG_COMMON = { // Dev & Common.
+  WP_API_ROOT: 'https://3dots.io/wp-blog-test/wp-json',
+  WP_API_NAMESPACE: '/wp/v2',
+  DISQUS_SRC: 'https://3dotsblogtest.disqus.com/embed.js'
+};
+const APP_CONFIG_PROD = {
+  WP_API_ROOT: 'https://3dots.io/wp-blog/wp-json',
+  DISQUS_SRC: 'https://3dotsblog.disqus.com/embed.js'
+};
+
+export const APP_CONFIG = Object.assign({}, APP_CONFIG_COMMON, ('prod' === ENV ? APP_CONFIG_PROD : {}));
+
+// ----------------
 // SystemsJS Configuration.
 
 const SYSTEM_CONFIG_DEV = {
   defaultJSExtensions: true,
   paths: {
     'bootstrap': `${APP_ROOT}bootstrap`,
+    'config': `${APP_ROOT}config`,
     'lodash': `${APP_BASE}node_modules/lodash/index`,
     '*': `${APP_BASE}node_modules/*`
   }

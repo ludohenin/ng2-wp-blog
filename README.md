@@ -48,7 +48,7 @@ WIP
 │               ├── posts.ts
 │               ├── root.ts
 │               ├── wp.ts
-│               ├── wp_collection.ts
+│               ├── wp_resource.ts
 │               └── xhr.ts
 └── index.html
 ```

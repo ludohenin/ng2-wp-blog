@@ -1,8 +1,11 @@
 import {EventEmitter, Injectable} from 'angular2/angular2';
 import {ApiService} from './xhr';
-import {WpCollection, WpModel, WpCollectionConfig} from './wp_collection';
+import {WpCollection, WpProviders, WpModel, WpResourceConfig} from './wp_resource';
 
+
+@Injectable()
 export class PostModel extends WpModel {
+  url: string = '/posts';
   id: number;
   date: Date;
   date_gmt: Date;
@@ -30,7 +33,7 @@ export class PostModel extends WpModel {
 
 @Injectable()
 export class PostsCollection extends WpCollection<PostModel> {
-  constructor(public api: ApiService, public config: WpCollectionConfig) {
+  constructor(public api: ApiService, public config: WpResourceConfig) {
     super(api, config);
     this.url = '/posts';
     this.modelProviders = [PostModel];
