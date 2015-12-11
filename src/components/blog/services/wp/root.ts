@@ -1,4 +1,5 @@
 import {EventEmitter, Injectable} from 'angular2/angular2';
+import {Response} from 'angular2/http';
 import {merge} from 'lodash';
 import {ApiService} from './xhr';
 import {WpModel, WpResourceConfig} from './wp_resource';
@@ -15,7 +16,7 @@ export class RootModel extends WpModel {
     super(api, config);
   }
   // Override the default Method as we want the api root (discovery endpoint).
-  get(): EventEmitter {
+  get(): EventEmitter<RootModel> {
     let request = new EventEmitter ();
     this.api.request({url: this.urlRoot}, {cache: true})
       .subscribe((res: Response) => {

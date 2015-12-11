@@ -1,9 +1,17 @@
 <article class="section" *ngFor="#post of posts">
   <header>
-    <h4><a [routerLink]="['../PostCmp', { id: post.id }]">{{ post.title.rendered }}</a></h4>
+    <h4><a [routerLink]="['../PostPage', { id: post.id }]">{{ post.title.rendered }}</a></h4>
   </header>
 
   <section [innerHtml]="post.excerpt.rendered"></section>
 
   <div class="divider"></div>
 </article>
+
+<pagination class="center-align"
+            *ngIf="posts"
+            [activePage]="activePage"
+            (changePage)="loadPage($event)"
+            [maxPages]="5"
+            [totalPages]="wp.posts.totalPages">
+</pagination>
