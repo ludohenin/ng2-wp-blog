@@ -33,6 +33,8 @@ export class PostModel extends WpModel {
 
 @Injectable()
 export class PostsCollection extends WpCollection<PostModel> {
+  totalPosts: number = 12;
+  totalPages: number = 2;
   constructor(public api: ApiService, public config: WpResourceConfig) {
     super(api, config);
     this.url = '/posts';

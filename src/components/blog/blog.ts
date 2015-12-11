@@ -19,6 +19,7 @@ export const BLOG_PROVIDERS = [
   provide(WpResourceConfig, { useValue: {
     urlRoot: CONFIG.WP_API_ROOT,
     namespace: CONFIG.WP_API_NAMESPACE
+    // per_page: 10
   }}),
 ];
 
@@ -31,8 +32,9 @@ export const BLOG_PROVIDERS = [
   directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, NavbarCmp]
 })
 @RouteConfig([
-  { path: '/', component: PostsCmp, as: 'PostsCmp' },
-  { path: '/posts/:id/', component: PostCmp, as: 'PostCmp' }
+  { path: '/', component: PostsCmp, as: 'PostsHome' },
+  { path: '/posts/:id', component: PostCmp, as: 'PostPage' },
+  { path: '/page/:id', component: PostsCmp, as: 'PostsPage' }
 ])
 export class BlogCmp {
   site: RootModel;

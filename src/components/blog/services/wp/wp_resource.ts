@@ -105,7 +105,7 @@ export class WpCollection<T extends WpModel> extends Array {
   public getModelInstance(): T {
     return new this.modelToken(this.api, this.config);
   }
-  private _mapCollection(collection: any[]) {
+  private _mapCollection(collection: any) {
     return collection.map(rawModel => {
       let cachedModel = this.findOneById(rawModel.id);
       if (cachedModel) {
