@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from 'angular2/angular2';
 import {ApiService} from './xhr';
-import {WpCollection, WpProviders, WpModel, WpResourceConfig} from './wp_resource';
+import {WpCollection, WpModel, WpResourceConfig} from './wp_resource';
 
 
 @Injectable()

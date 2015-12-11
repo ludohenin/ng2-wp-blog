@@ -3,8 +3,6 @@ import {Response, URLSearchParams} from 'angular2/http';
 import {find, merge} from 'lodash';
 import {ApiService} from './xhr';
 
-export class WpProviders {};
-
 @Injectable()
 export class WpResourceConfig {
   urlRoot: string = '';
@@ -45,7 +43,8 @@ export class WpModel {
   }
 }
 
-// TODO: Validate generic type.
+
+// TODO: Validate generic type works (as I expect).
 @Injectable()
 export class WpCollection<T extends WpModel> extends Array {
   urlRoot: string;
@@ -122,7 +121,6 @@ export class WpCollection<T extends WpModel> extends Array {
 }
 
 export const WP_RESOURCE_PROVIDERS = [
-  WpProviders,
   WpResourceConfig,
   WpCollection,
   WpModel

@@ -7,7 +7,7 @@ import {NavbarCmp} from './components/navbar/navbar';
 import {PostCmp} from './components/post/post';
 import {PostsCmp} from './components/posts/posts';
 
-import {SERVICE_PROVIDERS, WpService, WpResourceConfig, WpCollection, PostModel, RootModel} from './services/services';
+import {SERVICE_PROVIDERS, WpService, WpResourceConfig, PostModel, RootModel} from './services/services';
 import {BLOG_DIRECTIVES} from './directives/directives';
 
 import * as CONFIG from 'config';

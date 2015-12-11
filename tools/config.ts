@@ -89,7 +89,7 @@ const APP_CONFIG_PROD = {
   DISQUS_SRC: 'https://3dotsblog.disqus.com/embed.js'
 };
 
-export const APP_CONFIG = Object.assign({}, APP_CONFIG_COMMON, ('prod' === ENV ? APP_CONFIG_PROD : {}));
+export const APP_CONFIG = Object.assign({}, APP_CONFIG_COMMON, ('prod' === APP_ENV ? APP_CONFIG_PROD : {}));
 
 // ----------------
 // SystemsJS Configuration.
