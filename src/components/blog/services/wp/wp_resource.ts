@@ -105,6 +105,8 @@ export class WpCollection<T extends WpModel> extends Array {
   getPage(page: number = 1, options: any = {}): EventEmitter<T[]> {
     let searchParams = new URLSearchParams();
     searchParams.set('page', page.toString());
+    // TODO: move to config.
+    searchParams.set('_embed', '1');
     Object.keys(options).forEach(k => searchParams.set(k, options[k]));
     return this.getList(searchParams);
   }
