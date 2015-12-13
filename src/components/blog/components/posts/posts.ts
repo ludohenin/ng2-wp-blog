@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation} from 'angular2/angular2';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {WpService, PostModel} from '../../services/services';
+import {BLOG_DIRECTIVES} from '../../directives/directives';
 import {PaginationCmp} from '../pagination/pagination';
 
 @Component({
@@ -10,7 +11,7 @@ import {PaginationCmp} from '../pagination/pagination';
   templateUrl: './components/blog/components/posts/posts.html',
   styleUrls: ['./components/blog/components/posts/posts.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, PaginationCmp]
+  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, PaginationCmp]
 })
 export class PostsCmp {
   posts: PostModel[];
@@ -24,6 +25,6 @@ export class PostsCmp {
     this.activePage = id;
     this.wp.posts
       .getPage(id)
-      .subscribe(posts => this.posts = posts);
+      .subscribe(res => this.posts = res.data);
   }
 }

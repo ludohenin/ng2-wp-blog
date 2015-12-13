@@ -3,7 +3,20 @@
     <h4><a [routerLink]="['../PostPage', { id: post.id }]">{{ post.title.rendered }}</a></h4>
   </header>
 
-  <section [innerHtml]="post.excerpt.rendered"></section>
+  <section [excerpt]="post.content.rendered"></section>
+
+  <section class="grey-text">
+    <div *ngIf="post.tags">
+      <i class="material-icons tiny">label</i>
+        <span *ngFor="#tag of post.tags; #last = last">
+          <a href="#">{{ tag.name }}</a><span *ngIf="!last">,</span>
+        </span>
+    </div>
+    <div>
+      <i class="material-icons tiny">date_range</i> {{ post.date }} -
+      <i class="material-icons orange-text text-darken-1 tiny">update</i> {{ post.modified }}
+    </div>
+  </section>
 
   <div class="divider"></div>
 </article>
@@ -12,6 +25,5 @@
             *ngIf="posts"
             [activePage]="activePage"
             (changePage)="loadPage($event)"
-            [maxPages]="5"
             [totalPages]="wp.posts.totalPages">
 </pagination>

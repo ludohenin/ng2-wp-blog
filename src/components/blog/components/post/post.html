@@ -1,6 +1,6 @@
 <article *ngIf="post">
   <header>
-    <h3>{{ post.title.rendered }}</h3>
+    <h3><a [routerLink]="['../PostPage', {id: post.id}]">{{ post.title.rendered }}</a></h3>
   </header>
 
   <section [innerHtml]="post.content.rendered" prism></section>

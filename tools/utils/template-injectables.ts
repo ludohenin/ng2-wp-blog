@@ -8,13 +8,13 @@ export function injectableAssetsRef() {
   return injectables;
 }
 
-// export function registerInjectableAssetsRef(paths: string[], target: string = '') {
-//   injectables = injectables.concat(
-//     paths
-//       .filter(path => !/(\.map)$/.test(path))
-//       .map(path => join(target, slash(path).split('/').pop()))
-//   );
-// }
+export function registerInjectableAssetsRef(paths: string[], target: string = '') {
+  injectables = injectables.concat(
+    paths
+      .filter(path => !/(\.map)$/.test(path))
+      .map(path => join(target, slash(path).split('/').pop()))
+  );
+}
 
 export function transformPath(plugins, env) {
   return function (filepath) {

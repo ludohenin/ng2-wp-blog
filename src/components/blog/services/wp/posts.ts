@@ -1,11 +1,14 @@
-import {EventEmitter, Injectable} from 'angular2/angular2';
+import {Injectable} from 'angular2/angular2';
+import {isArray} from 'lodash';
 import {ApiService} from './xhr';
-import {WpCollection, WpModel, WpResourceConfig} from './wp_resource';
+import {WpCollection, WpModel, WpResourceConfig, WpModelFactory} from './wp_resource';
 
 
 @Injectable()
 export class PostModel extends WpModel {
   url: string = '/posts';
+  _tags: any[];
+
   id: number;
   date: Date;
   date_gmt: Date;
@@ -28,29 +31,29 @@ export class PostModel extends WpModel {
   format: string;
   _links: any;
   _embedded: any;
+  get tags() {
+    let tagTaxonomy = 'post_tag';
+    let tags: any[];
+    this._embedded['http://api.w.org/term'].forEach((terms => {
+      if (isArray(terms)) {
+        terms.forEach(term => {
+          if (term.taxonomy === tagTaxonomy) {
+            tags = tags || [];
+            tags.push(term);
+          }
+        });
+      }
+    }));
+    return tags;
+  }
 }
-
 
 @Injectable()
 export class PostsCollection extends WpCollection<PostModel> {
-  totalPosts: number = 12;
-  totalPages: number = 2;
-  constructor(public api: ApiService, public config: WpResourceConfig) {
-    super(api, config);
-    this.url = '/posts';
-    this.modelProviders = [PostModel];
-    this.modelToken = PostModel;
-  }
-  initialize(): EventEmitter<PostModel[]> {
-    let event = new EventEmitter();
-    // this.getPage(1).subscribe(res => {
-    //   // TODO: move header names to config.
-    //   this.total = parseInt(this.response.headers.get('x-wp-total'));
-    //   this.total_pages = parseInt(this.response.headers.get('x-wp-totalpages'));
-    //   this.initialized = true;
-    //   event.next(res);
-    // });
-    return event;
+  modelToken = PostModel;
+  url = '/posts';
+  constructor(public api: ApiService, public config: WpResourceConfig, modelFactory: WpModelFactory) {
+    super(api, config, modelFactory);
   }
 }
 

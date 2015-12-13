@@ -12,7 +12,7 @@
 
     "build.preprod": "gulp build.prod --env prod --app-env dev --dest preprod",
     "serve.preprod": "http-server ./dist/preprod -p 5556 -o",
-    
+
     "build.stage": "gulp build.prod --env prod --app-env dev --dest stage --base /blog_stage/",
     "stage": "rsync -r --verbose ./dist/stage/ root@3dots.io:/var/www/blog_stage/",
 
@@ -73,6 +73,7 @@
     "gulp-typedoc": "^1.2.1",
     "gulp-typescript": "~2.8.2",
     "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.2.4",
     "jasmine-core": "~2.3.4",
     "karma": "~0.12.37",

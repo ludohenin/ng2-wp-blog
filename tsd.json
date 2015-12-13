@@ -9,8 +9,20 @@
       "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"
     },
     "node/node.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
     },
+    "gulp-util/gulp-util.d.ts": {
+      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+    },
+    "vinyl/vinyl.d.ts": {
+      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+    },
+    "through2/through2.d.ts": {
+      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+    },
+    "chalk/chalk.d.ts": {
+      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+     },
     "gulp/gulp.d.ts": {
       "commit": "05557455c49043ff0189182e27c9e04403a70802"
     },

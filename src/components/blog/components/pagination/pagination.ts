@@ -8,12 +8,11 @@ import {RouterLink} from 'angular2/router';
   styleUrls: ['./components/blog/components/pagination/pagination.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [RouterLink],
-  properties: ['activePage', 'maxPages', 'totalPages'],
+  properties: ['activePage', 'totalPages'],
   events: ['changePage']
 })
 export class PaginationCmp {
   activePage: number;
-  maxPages: number;
   pages: number[];
   changePage: EventEmitter<number> = new EventEmitter();
   set totalPages(val: number) {
@@ -33,11 +32,14 @@ export class PaginationCmp {
     this.changePage.next(this.activePage - 1);
     return false;
   }
-  private makeArray(num: number): number[] {
-    let numbers = [];
-    for (let i = 1; i <= num; i++) {
-      numbers.push(i);
+  private makeArray(numberOfPages: number): number[] {
+    let pagesSequence = [];
+
+    // TODO: support very long list of pages
+
+    for (let i = 1; i <= numberOfPages; i++) {
+      pagesSequence.push(i);
     }
-    return numbers;
+    return pagesSequence;
   }
 }
