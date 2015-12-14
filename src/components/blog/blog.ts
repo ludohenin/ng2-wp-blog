@@ -6,11 +6,34 @@ import {NavbarCmp} from './components/navbar/navbar';
 import {PostCmp} from './components/post/post';
 import {PostsCmp} from './components/posts/posts';
 
-import {SERVICE_PROVIDERS, ApiService, WpService, WpResourceConfig, PostModel,
-   RootModel, WpModelFactory, makeModelFactory} from './services/services';
+import {
+  SERVICE_PROVIDERS,
+  ApiService,
+  WpService,
+  WpResourceConfig,
+  RootModel,
+  WpModelFactory,
+  makeModelFactory
+} from './services/services';
 import {BLOG_DIRECTIVES} from './directives/directives';
 
 import * as CONFIG from 'config';
+
+const WpResourceCustomConfig = {
+  urlRoot: CONFIG.WP_API_ROOT,
+  namespace: CONFIG.WP_API_NAMESPACE,
+  request: {
+    search: {
+      per_page: 2,
+      _embed: 1
+    }
+  }
+};
+
+const WpModelFactoryDef = {
+  useFactory: makeModelFactory(),
+  deps: [ApiService, WpResourceConfig]
+};
 
 // ----------------
 // Configuration.
@@ -18,19 +41,8 @@ import * as CONFIG from 'config';
 export const BLOG_PROVIDERS = [
   HTTP_PROVIDERS,
   SERVICE_PROVIDERS,
-  provide(WpResourceConfig, { useValue: {
-    urlRoot: CONFIG.WP_API_ROOT,
-    namespace: CONFIG.WP_API_NAMESPACE
-    // request: {
-    //   search: {
-    //     per_page: 10
-    //   }
-    // }
-  }}),
-  provide(WpModelFactory, {
-    useFactory: makeModelFactory(PostModel),
-    deps: [ApiService, WpResourceConfig]
-  })
+  provide(WpResourceConfig, { useValue: WpResourceCustomConfig}),
+  provide(WpModelFactory, WpModelFactoryDef)
 ];
 
 @Component({

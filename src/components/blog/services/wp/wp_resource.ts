@@ -1,29 +1,56 @@
 import {EventEmitter, Injectable} from 'angular2/angular2';
-import {Response, URLSearchParams} from 'angular2/http';
+import {RequestOptionsArgs, Response, URLSearchParams} from 'angular2/http';
 import {find, merge} from 'lodash';
 import {ApiService} from './xhr';
 
+function mapFromConfig(ctx, conf) {
+  ctx['url'] = conf.url;
+  ctx['urlRoot'] = conf.urlRoot;
+  ctx['namespace'] = conf.namespace;
+}
+
 @Injectable()
 export class WpResourceConfig {
-  urlRoot: string = '';
-  namespace: string = '';
-  url: string = '';
+  urlRoot: string;
+  namespace: string;
+  url: string;
+  taxonomy: {
+    tag: string;
+    category: string;
+  };
+  request: RequestOptionsArgs;
 }
+
+const WpResourceDefaultConfig: WpResourceConfig = {
+  urlRoot: '',
+  namespace: '',
+  url: '',
+  taxonomy: {
+    tag: 'post_tag',
+    category: 'category'
+  },
+  request: {}
+};
 
 @Injectable()
 export class WpModel {
   id: number;
+  parent: WpCollection<WpModel>;
   urlRoot: string;
   namespace: string;
   url: string;
   constructor(public api: ApiService, public config: WpResourceConfig) {
-    merge(this, config);
+    this._mergeConfig();
+    mapFromConfig(this, this.config);
   }
   // TODO: add request options.
-  get(id: number): EventEmitter<WpModel> {
+  get(id: number, params: any = {}): EventEmitter<WpModel> {
     let request = new EventEmitter ();
     let searchParams = new URLSearchParams();
-    searchParams.set('_embed', '1');
+
+    Object.keys(this.config.request.search).forEach(k => searchParams.set(k, this.config.request.search[k]));
+    Object.keys(params).forEach(k => searchParams.set(k, params[k]));
+
     this.api.request({
       url: `${this.urlRoot}${this.namespace}${this.url}/${id}`,
       search: searchParams
@@ -39,7 +66,28 @@ export class WpModel {
   delete() {/** NOT YET IMPLEMENTED */}
   set(json: any): WpModel {
     merge(this, json);
+    this.mapDates();
     return this;
+  }
+  mapDates() {
+    let props = ['date', 'date_gmt', 'modified', 'modified_gmt'];
+    let keys = Object.keys(this);
+    props.forEach(prop => {
+      if (keys.indexOf(prop) > -1) {
+        this[prop] = new Date(this[prop]);
+      }
+    });
+
+    function map(key) {
+      props.forEach(prop => {
+        if (this[key] === prop) {
+          this[key] = new Date(this[key]);
+        }
+      });
+    }
+  }
+  private _mergeConfig() {
+    merge(this.config, merge(WpResourceDefaultConfig, this.config));
   }
 }
 
@@ -55,7 +103,7 @@ class WpModelFactoryImpl {
   };
 }
 
-export function makeModelFactory<T>(ctor: T) {
+export function makeModelFactory() {
   return function modelFactory(...deps: any[]) {
     return new WpModelFactoryImpl(deps);
   };
@@ -74,7 +122,8 @@ export class WpCollection<T extends WpModel> extends Array {
   totalPages: number;
   constructor(public api: ApiService, public config: WpResourceConfig, public modelFactory: WpModelFactory) {
     super();
-    merge(this, config);
+    this._mergeConfig();
+    mapFromConfig(this, this.config);
   }
   init(): WpCollection<T> {
     if (this.initialized) { return this; }
@@ -102,12 +151,14 @@ export class WpCollection<T extends WpModel> extends Array {
 
     return request;
   }
-  getPage(page: number = 1, options: any = {}): EventEmitter<T[]> {
+  getPage(page: number = 1, params: any = {}): EventEmitter<T[]> {
     let searchParams = new URLSearchParams();
     searchParams.set('page', page.toString());
-    // TODO: move to config.
-    searchParams.set('_embed', '1');
-    Object.keys(options).forEach(k => searchParams.set(k, options[k]));
+
+    // TODO: Move into a method.
+    Object.keys(this.config.request.search).forEach(k => searchParams.set(k, this.config.request.search[k]));
+    Object.keys(params).forEach(k => searchParams.set(k, params[k]));
+
     return this.getList(searchParams);
   }
   //TODO: Update return type acc to apiResponse object type ({data, raw}).
@@ -138,9 +189,13 @@ export class WpCollection<T extends WpModel> extends Array {
       } else {
         let model = this.modelFactory.getModelInstance(this.modelToken);
         this.push(model.set(rawModel));
+        model.set({ parent: this });
         return model;
       }
     });
+  }
+  private _mergeConfig() {
+    merge(this.config, merge(WpResourceDefaultConfig, this.config));
   }
 }
 

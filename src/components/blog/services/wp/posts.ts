@@ -31,20 +31,22 @@ export class PostModel extends WpModel {
   format: string;
   _links: any;
   _embedded: any;
+  // TODO: Improve to support w/o _embedded and probably move out
   get tags() {
-    let tagTaxonomy = 'post_tag';
-    let tags: any[];
-    this._embedded['http://api.w.org/term'].forEach((terms => {
+    if (this._tags) { return this._tags; }
+
+    let tagTaxonomy = this.config.taxonomy.tag;
+    this._embedded['http://api.w.org/term'].forEach(terms => {
       if (isArray(terms)) {
         terms.forEach(term => {
           if (term.taxonomy === tagTaxonomy) {
-            tags = tags || [];
-            tags.push(term);
+            this._tags = this._tags || [];
+            this.tags.push(term);
           }
         });
       }
-    }));
-    return tags;
+    });
+    return this._tags;
   }
 }
 

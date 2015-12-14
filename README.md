@@ -23,11 +23,21 @@ WIP
 │       ├── blog.ts
 │       ├── blog_spec.ts
 │       ├── components
+│       │   ├── disqus
+│       │   │   ├── disqus.css
+│       │   │   ├── disqus.html
+│       │   │   ├── disqus.ts
+│       │   │   └── disqus_spec.ts
 │       │   ├── navbar
 │       │   │   ├── navbar.css
 │       │   │   ├── navbar.html
 │       │   │   ├── navbar.ts
 │       │   │   └── navbar_spec.ts
+│       │   ├── pagination
+│       │   │   ├── pagination.css
+│       │   │   ├── pagination.html
+│       │   │   ├── pagination.ts
+│       │   │   └── pagination_spec.ts
 │       │   ├── post
 │       │   │   ├── post.css
 │       │   │   ├── post.html
@@ -38,17 +48,19 @@ WIP
 │       │       ├── posts.html
 │       │       ├── posts.ts
 │       │       └── posts_spec.ts
-│       ├── config.ts
 │       ├── directives
-│       │   └── directives.ts
-│       ├── sample.config.ts
+│       │   ├── directives.ts
+│       │   └── excerpt.ts
 │       └── services
 │           ├── services.ts
 │           └── wp
 │               ├── posts.ts
 │               ├── root.ts
+│               ├── terms.ts
+│               ├── users.ts
 │               ├── wp.ts
 │               ├── wp_resource.ts
 │               └── xhr.ts
+├── config.ts
 └── index.html
 ```
