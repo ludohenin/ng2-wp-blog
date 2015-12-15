@@ -8,5 +8,6 @@ declare module 'config' {
     WP_API_ROOT: string;
     WP_API_NAMESPACE: string;
     DISQUS_SRC: string;
+    GA_ID: string;
   }
 }

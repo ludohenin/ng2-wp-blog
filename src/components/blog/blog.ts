@@ -24,7 +24,7 @@ const WpResourceCustomConfig = {
   namespace: CONFIG.WP_API_NAMESPACE,
   request: {
     search: {
-      per_page: 2,
+      per_page: 5,
       _embed: 1
     }
   }

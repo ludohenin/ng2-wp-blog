@@ -24,8 +24,9 @@ export class DisqusCmp {
         reload: true,
         config: function () {
             this.page.identifier = _self._post.id;
-            this.page.url = _self._post.link;
-            this.page.title = _self._post.slug;
+            // Until both wp and ng2 app are under the same folder.
+            this.page.url = _self._post.link.replace('wp-blog', 'blog');
+            this.page.title = _self._post.title.rendered;
             this.language = 'en';
         }
     });

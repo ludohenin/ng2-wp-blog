@@ -6,7 +6,7 @@
   <title><%= APP_TITLE %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- inject:css -->
   <!-- endinject -->
@@ -23,6 +23,11 @@
   <!-- endinject -->
 
   <script src="<%= APP_CONFIG.DISQUS_SRC %>"></script>
+  <script>
+    var script = document.createElement('script');
+    script.src = '//www.google-analytics.com/ga.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+  </script>
 
   <script>
     System.import('bootstrap')
