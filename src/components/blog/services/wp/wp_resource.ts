@@ -77,14 +77,6 @@ export class WpModel {
         this[prop] = new Date(this[prop]);
       }
     });
-
-    function map(key) {
-      props.forEach(prop => {
-        if (this[key] === prop) {
-          this[key] = new Date(this[key]);
-        }
-      });
-    }
   }
   private _mergeConfig() {
     merge(this.config, merge(WpResourceDefaultConfig, this.config));
