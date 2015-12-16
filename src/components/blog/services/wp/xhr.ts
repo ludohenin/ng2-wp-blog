@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, provide} from 'angular2/angular2';
+import {EventEmitter, Injectable, provide} from 'angular2/core';
 import {Http, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response} from 'angular2/http';
 import {extend} from 'lodash';
 

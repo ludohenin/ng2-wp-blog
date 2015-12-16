@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewEncapsulation} from 'angular2/angular2';
+import {Component, ElementRef, ViewEncapsulation} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {WpService, PostModel} from '../../services/services';

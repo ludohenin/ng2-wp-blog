@@ -49,16 +49,29 @@ const NPM_DEPENDENCIES_COMMON = [
 ];
 
 const NPM_DEPENDENCIES_DEV = [
+  { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims', dest: LIB_DEST },
+  { src: 'rxjs/bundles/Rx.min.js',           inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/angular2.dev.js', inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/router.dev.js',   inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/http.dev.js',     inject: 'libs', dest: LIB_DEST },
 ];
 
 const NPM_DEPENDENCIES_PROD = [
+  { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'shims', dest: LIB_DEST },
   { src: 'angular2/bundles/angular2.min.js', inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/router.min.js',   inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/http.min.js',     inject: 'libs', dest: LIB_DEST },
 ];
+
+
+const NPM_DEPENDENCIES = NPM_DEPENDENCIES_COMMON.concat(
+'dev' === ENV ? NPM_DEPENDENCIES_DEV
+                : NPM_DEPENDENCIES_PROD);
+
+NPM_DEPENDENCIES
+  .filter(d => !/\*/.test(d.src))
+  .forEach(d => d.src = require.resolve(d.src));
+
 
 // List all app dependencies not loaded asynchrounously with SystemJS script loader.
 export const APP_ASSETS = [
@@ -66,11 +79,6 @@ export const APP_ASSETS = [
   { src: `${ASSETS_SRC}/prism.css`, inject: true, dest: CSS_DEST },
   { src: `${ASSETS_SRC}/main.css`,  inject: true, dest: CSS_DEST }
 ];
-
-const NPM_DEPENDENCIES = NPM_DEPENDENCIES_COMMON.concat('dev' === ENV ? NPM_DEPENDENCIES_DEV : NPM_DEPENDENCIES_PROD);
-NPM_DEPENDENCIES
-  .filter(d => !/\*/.test(d.src))
-  .forEach(d => d.src = require.resolve(d.src));
 
 export const DEPENDENCIES = NPM_DEPENDENCIES.concat(APP_ASSETS);
 

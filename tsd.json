@@ -61,12 +61,6 @@
     },
     "qs/qs.d.ts": {
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "moment/moment.d.ts": {
-      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
-    },
-    "moment/moment-node.d.ts": {
-      "commit": "17dd34132c2a1a4d6a8bf1816effcff3ec922034"
     }
   }
 }

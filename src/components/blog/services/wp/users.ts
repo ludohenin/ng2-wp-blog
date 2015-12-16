@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/angular2';
+import {Injectable} from 'angular2/core';
 import {ApiService} from './xhr';
 import {WpCollection, WpModel, WpResourceConfig, WpModelFactory} from './wp_resource';
 

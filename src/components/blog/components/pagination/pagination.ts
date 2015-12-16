@@ -1,4 +1,4 @@
-import {Component, EventEmitter, ViewEncapsulation} from 'angular2/angular2';
+import {Component, EventEmitter, ViewEncapsulation} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
 

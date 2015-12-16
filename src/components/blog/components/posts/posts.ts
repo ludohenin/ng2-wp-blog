@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from 'angular2/angular2';
+import {Component, ViewEncapsulation} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {WpService, PostModel} from '../../services/services';
@@ -25,6 +25,8 @@ export class PostsCmp {
     this.activePage = id;
     this.wp.posts
       .getPage(id)
-      .subscribe(res => this.posts = res.data);
+      .subscribe(res => {
+        this.posts = res.data;
+      });
   }
 }

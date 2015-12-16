@@ -1,4 +1,4 @@
-import {Component, provide, ViewEncapsulation} from 'angular2/angular2';
+import {Component, provide, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
