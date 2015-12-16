@@ -7,9 +7,7 @@ export class GoogleAnalyticsService {
   base: string = '';
   ga: any;
   constructor(public router: Router) {
-    let ga = (<any>window).ga;
-    ga = ga || function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-    this.ga = ga;
+    this.ga = (<any>window).ga;
     this.init(config.GA_ID, '/blog/');
     router.subscribe(this.track.bind(this));
   }
