@@ -15,6 +15,9 @@ export const APP_BASE             = argv['base']        || '/';
 
 export const APP_TITLE            = '3dots blog' + ('dev' === APP_ENV ? ' DEV' : '');
 
+export const WP_DIR               = '../../Sites/wp-3dots-blog/wp-content/themes/angular2';
+export const ASSETS_PATH_PREFIX   = 'wp-content/themes/angular2';
+
 export const APP_SRC              = 'src';
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
@@ -50,7 +53,7 @@ const NPM_DEPENDENCIES_COMMON = [
 
 const NPM_DEPENDENCIES_DEV = [
   { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims', dest: LIB_DEST },
-  { src: 'rxjs/bundles/Rx.min.js',           inject: 'libs', dest: LIB_DEST },
+  { src: 'rxjs/bundles/Rx.js',           inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/angular2.dev.js', inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/router.dev.js',   inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/http.dev.js',     inject: 'libs', dest: LIB_DEST },
@@ -58,6 +61,7 @@ const NPM_DEPENDENCIES_DEV = [
 
 const NPM_DEPENDENCIES_PROD = [
   { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'shims', dest: LIB_DEST },
+  { src: 'rxjs/bundles/Rx.min.js',           inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/angular2.min.js', inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/router.min.js',   inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/http.min.js',     inject: 'libs', dest: LIB_DEST },
@@ -128,6 +132,9 @@ export const SYSTEM_CONFIG_BUILDER = {
 
 const SYSTEM_CONFIG_PROD = {
   defaultJSExtensions: true,
+  paths: {
+    'bundles/*': `${APP_ROOT}${ASSETS_PATH_PREFIX}/bundles/*`
+  },
   bundles: {
     'bundles/app': ['bootstrap']
   }

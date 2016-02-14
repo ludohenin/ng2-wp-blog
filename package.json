@@ -10,6 +10,9 @@
     "build.dev.watch": "gulp build.dev.watch",
     "serve.dev": "gulp serve --env dev",
 
+    "build.wp": "gulp build.wp --env prod --app-env dev --dest wp_dev --base /wp-3dots-blog/",
+    "serve.wp": "gulp open --port 8888",
+
     "build.preprod": "gulp build.prod --env prod --app-env dev --dest preprod",
     "serve.preprod": "http-server ./dist/preprod -p 5556 -o",
 

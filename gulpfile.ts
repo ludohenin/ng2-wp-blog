@@ -14,6 +14,7 @@ gulp.task('clean',       task('clean', 'all'));
 gulp.task('clean.dist',  task('clean', 'dist'));
 gulp.task('clean.test',  task('clean', 'test'));
 gulp.task('clean.tmp',   task('clean', 'tmp'));
+gulp.task('clean.wp',    task('clean', 'wp'));
 
 // --------------
 // Postinstall.
@@ -27,10 +28,15 @@ gulp.task('postinstall', done =>
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
               // 'tslint',
-              'build.sass.dev',
-              'build.img.dev',
+              'build.assets.dev',
               'build.js.dev',
               'build.index',
+              done));
+
+gulp.task('build.wp', done =>
+  runSequence('clean.wp',
+              'build.prod',
+              'copy2wp',
               done));
 
 // --------------
@@ -39,8 +45,7 @@ gulp.task('build.prod', done =>
   runSequence('clean.tmp',
               'clean.dist',
               'tslint',
-              'build.sass.dev',
-              'build.img.dev',
+              'build.assets.dev',
               'build.html_css.prod',
               'build.deps',
               'build.js.prod',
