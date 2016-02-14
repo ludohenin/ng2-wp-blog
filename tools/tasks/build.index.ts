@@ -4,7 +4,7 @@ import {transformPath, templateLocals} from '../utils';
 
 export = function buildIndexDev(gulp, plugins) {
   return function () {
-    return gulp.src(join(APP_SRC, 'index.html'))
+    return gulp.src([join(APP_SRC, 'index.html'), join(APP_SRC, 'index.php')])
       // NOTE: There might be a way to pipe in loop.
       .pipe(inject('shims'))
       .pipe(inject('libs'))

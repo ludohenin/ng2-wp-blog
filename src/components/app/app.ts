@@ -8,8 +8,8 @@ import {BlogCmp} from '../blog/blog';
 @Component({
   selector: 'app',
   providers: [GoogleAnalyticsService],
-  templateUrl: './components/app/app.html',
-  styleUrls: ['./components/app/app.css'],
+  templateUrl: './app.html',
+  styleUrls: ['./app.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES, BlogCmp]
 })

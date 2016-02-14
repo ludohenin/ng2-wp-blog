@@ -48,8 +48,8 @@ export const BLOG_PROVIDERS = [
 @Component({
   selector: 'blog',
   viewProviders: [BLOG_PROVIDERS],
-  templateUrl: './components/blog/blog.html',
-  styleUrls: ['./components/blog/blog.css'],
+  templateUrl: './blog.html',
+  styleUrls: ['./blog.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, NavbarCmp]
 })

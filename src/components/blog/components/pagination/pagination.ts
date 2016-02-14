@@ -4,8 +4,8 @@ import {RouterLink} from 'angular2/router';
 
 @Component({
   selector: 'pagination',
-  templateUrl: './components/blog/components/pagination/pagination.html',
-  styleUrls: ['./components/blog/components/pagination/pagination.css'],
+  templateUrl: './pagination.html',
+  styleUrls: ['./pagination.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [RouterLink],
   properties: ['activePage', 'totalPages'],

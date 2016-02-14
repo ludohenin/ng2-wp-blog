@@ -8,8 +8,8 @@ import {DisqusCmp} from '../disqus/disqus';
 @Component({
   selector: 'post',
   viewProviders: [],
-  templateUrl: './components/blog/components/post/post.html',
-  styleUrls: ['./components/blog/components/post/post.css'],
+  templateUrl: './post.html',
+  styleUrls: ['./post.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, DisqusCmp]
 })
