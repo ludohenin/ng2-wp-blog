@@ -15,28 +15,54 @@
 
   <app>Loading...</app>
 
+  <script>
+  // function.name (all IE)
+  // Remove once https://github.com/angular/angular/issues/6501 is fixed.
+  /*! @source http://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie*/
+  if (!Object.hasOwnProperty('name')) {
+    Object.defineProperty(Function.prototype, 'name', {
+      get: function() {
+        var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
+        var name = matches && matches.length > 1 ? matches[1] : "";
+        // For better performance only parse once, and then cache the
+        // result through a new accessor for repeated access.
+        Object.defineProperty(this, 'name', {value: name});
+        return name;
+      }
+    });
+  }
+  </script>
+
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
+
   <!-- shims:js -->
   <!-- endinject -->
 
+  <% if (ENV === 'dev') { %>
   <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
+  <% } %>
+
+  <script src="<%= APP_CONFIG.DISQUS_SRC %>"></script>
+  <script src="https://www.google-analytics.com/analytics.js"></script>
+
   <!-- libs:js -->
   <!-- endinject -->
 
-  <script src="<%= APP_CONFIG.DISQUS_SRC %>"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  </script>
+  <!-- inject:js -->
+  <!-- endinject -->
 
+  <% if (ENV === 'dev') { %>
   <script>
-    System.import('bootstrap')
-      .catch(function (e) {
-        console.error(e,
-          'Report this error at https://github.com/ludohenin/ng2-wp-blog/issues');
-      });
+  System.import('<%= BOOTSTRAP_MODULE %>')
+    .catch(function (e) {
+      console.error(e,
+        'Report this error at https://github.com/mgechev/angular2-seed/issues');
+    });
   </script>
+  <% } %>
 
 </body>
 </html>
