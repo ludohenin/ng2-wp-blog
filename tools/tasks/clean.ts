@@ -1,6 +1,8 @@
 import * as async from 'async';
+import * as util from 'gulp-util';
+import * as chalk from 'chalk';
 import * as del from 'del';
-import {APP_DEST, TEST_DEST, TMP_DIR, WP_DIR} from '../config';
+import {APP_DEST, TEST_SPEC_DEST, TEST_E2E_DEST, TMP_DIR} from '../config';
 
 export = function clean(gulp, plugins, option) {
   return function (done) {
@@ -10,7 +12,6 @@ export = function clean(gulp, plugins, option) {
       case 'dist'   : cleanDist(done);    break;
       case 'test'   : cleanTest(done);    break;
       case 'tmp'    : cleanTmp(done);     break;
-      case 'wp'     : cleanWp(done);      break;
       default: done();
     }
 
@@ -25,14 +26,20 @@ function cleanAll(done) {
   ], done);
 }
 function cleanDist(done) {
-  del(APP_DEST, done);
+  del(APP_DEST).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }
 function cleanTest(done) {
-  del(TEST_DEST, done);
+  del([TEST_SPEC_DEST, TEST_E2E_DEST]).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }
 function cleanTmp(done) {
-  del(TMP_DIR, done);
-}
-function cleanWp(done) {
-  del(WP_DIR, {force: true}, done);
+  del(TMP_DIR).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }

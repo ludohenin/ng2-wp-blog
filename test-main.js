@@ -1,7 +1,18 @@
-// Turn on full stack traces in errors to help debugging
-Error.stackTraceLimit=Infinity;
+if (!Object.hasOwnProperty('name')) {
+  Object.defineProperty(Function.prototype, 'name', {
+    get: function() {
+      var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
+      var name = matches && matches.length > 1 ? matches[1] : "";
+      Object.defineProperty(this, 'name', {value: name});
+      return name;
+    }
+  });
+}
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 100;
+// Turn on full stack traces in errors to help debugging
+Error.stackTraceLimit = Infinity;
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
 // Cancel Karma's synchronous start,
 // we will call `__karma__.start()` later, once all the specs are loaded.
@@ -12,11 +23,21 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js'
+    'rxjs/*': 'node_modules/rxjs/*.js'
   }
 });
 
-System.import('angular2/src/core/dom/browser_adapter').then(function(browser_adapter) {
+Promise.all([
+  System.import('angular2/src/platform/browser/browser_adapter'),
+  System.import('angular2/platform/testing/browser'),
+  System.import('angular2/testing')
+]).then(function (modules) {
+  var browser_adapter = modules[0];
+  var providers = modules[1];
+  var testing = modules[2];
+  testing.setBaseTestProviders(providers.TEST_BROWSER_PLATFORM_PROVIDERS,
+                       providers.TEST_BROWSER_APPLICATION_PROVIDERS);
+
   browser_adapter.BrowserDomAdapter.makeCurrent();
 }).then(function() {
   return Promise.all(
@@ -39,7 +60,6 @@ System.import('angular2/src/core/dom/browser_adapter').then(function(browser_ada
   console.error(error.stack || error);
   __karma__.start();
 });
-
 
 function onlySpecFiles(path) {
   return /[\.|_]spec\.js$/.test(path);

@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Router} from 'angular2/router';
-import * as config from 'config';
+import * as CONFIG from '../config';
 
 @Injectable()
 export class GoogleAnalyticsService {
@@ -8,7 +8,7 @@ export class GoogleAnalyticsService {
   ga: any;
   constructor(public router: Router) {
     this.ga = (<any>window).ga;
-    this.init(config.GA_ID, '/blog/');
+    this.init(CONFIG.default.GA_ID, '/blog/');
     router.subscribe(this.track.bind(this));
   }
   init(id: string, base: string) {

@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {isArray} from 'lodash';
+import {isArray} from 'lodash/lodash';
 import {ApiService} from './xhr';
 import {WpCollection, WpModel, WpResourceConfig, WpModelFactory} from './wp_resource';
 

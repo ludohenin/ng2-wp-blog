@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, provide} from 'angular2/core';
 import {Http, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response} from 'angular2/http';
-import {extend} from 'lodash';
+import {extend} from 'lodash/lodash';
 
 
 export function makeRequestOtions(opts: RequestOptions|RequestOptionsArgs): RequestOptions {

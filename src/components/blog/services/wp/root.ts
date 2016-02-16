@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from 'angular2/core';
 import {Response} from 'angular2/http';
-import {merge} from 'lodash';
+import {merge} from 'lodash/lodash';
 import {ApiService} from './xhr';
 import {WpModel, WpResourceConfig} from './wp_resource';
 
