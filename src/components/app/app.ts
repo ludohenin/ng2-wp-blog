@@ -8,6 +8,7 @@ import {BlogCmp} from '../blog/blog';
 @Component({
   selector: 'app',
   providers: [GoogleAnalyticsService],
+  moduleId: module.id,
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   encapsulation: ViewEncapsulation.None,

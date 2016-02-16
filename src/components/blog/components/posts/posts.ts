@@ -8,6 +8,7 @@ import {PaginationCmp} from '../pagination/pagination';
 @Component({
   selector: 'posts',
   viewProviders: [],
+  moduleId: module.id,
   templateUrl: './posts.html',
   styleUrls: ['./posts.css'],
   encapsulation: ViewEncapsulation.None,

@@ -48,6 +48,7 @@ export const BLOG_PROVIDERS = [
 @Component({
   selector: 'blog',
   viewProviders: [BLOG_PROVIDERS],
+  moduleId: module.id,
   templateUrl: './blog.html',
   styleUrls: ['./blog.css'],
   encapsulation: ViewEncapsulation.None,

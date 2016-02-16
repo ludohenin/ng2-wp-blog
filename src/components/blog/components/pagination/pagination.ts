@@ -4,6 +4,7 @@ import {RouterLink} from 'angular2/router';
 
 @Component({
   selector: 'pagination',
+  moduleId: module.id,
   templateUrl: './pagination.html',
   styleUrls: ['./pagination.css'],
   encapsulation: ViewEncapsulation.None,
