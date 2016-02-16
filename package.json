@@ -29,7 +29,7 @@
     "karma": "karma",
     "karma.start": "karma start",
     "lint": "gulp tslint",
-    "postinstall": "typings install && gulp check.versions && gulp postinstall",
+    "postinstall": "typings install && gulp check.versions && npm prune",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
     "start": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
