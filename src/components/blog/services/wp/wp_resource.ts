@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from 'angular2/core';
 import {RequestOptionsArgs, Response, URLSearchParams} from 'angular2/http';
-import {find, merge} from 'lodash';
+import {find, merge} from 'lodash/lodash';
 import {ApiService} from './xhr';
 
 function mapFromConfig(ctx, conf) {

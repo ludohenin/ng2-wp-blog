@@ -1,12 +1,5 @@
 import * as gulp from 'gulp';
-import * as runSequence from 'run-sequence';
-import {ENV} from './tools/config';
-import {loadTasks, task} from './tools/utils';
-
-
-// --------------
-// Configuration.
-loadTasks();
+import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
@@ -14,6 +7,11 @@ gulp.task('clean',       task('clean', 'all'));
 gulp.task('clean.dist',  task('clean', 'dist'));
 gulp.task('clean.test',  task('clean', 'test'));
 gulp.task('clean.tmp',   task('clean', 'tmp'));
+gulp.task('clean.wp',    task('clean', 'wp'));
+
+gulp.task('check.versions', task('check.versions'));
+gulp.task('build.docs', task('build.docs'));
+gulp.task('serve.docs', task('serve.docs'));
 
 // --------------
 // Postinstall.
@@ -27,25 +25,29 @@ gulp.task('postinstall', done =>
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
               // 'tslint',
-              'build.sass.dev',
-              'build.img.dev',
+              'build.assets.dev',
               'build.js.dev',
-              'build.index',
+              'build.index.dev',
+              done));
+
+gulp.task('build.wp', done =>
+  runSequence('clean.wp',
+              'build.prod',
+              'copy2wp',
               done));
 
 // --------------
 // Build prod.
 gulp.task('build.prod', done =>
-  runSequence('clean.tmp',
-              'clean.dist',
+  runSequence('clean.dist',
+              'clean.tmp',
               'tslint',
-              'build.sass.dev',
-              'build.img.dev',
+              'build.assets.prod',
               'build.html_css.prod',
-              'build.deps',
               'build.js.prod',
               'build.bundles',
-              'build.index',
+              'build.bundles.app',
+              'build.index.prod',
               done));
 
 // --------------
@@ -72,7 +74,7 @@ gulp.task('test', done =>
 // --------------
 // Serve.
 gulp.task('serve', done =>
-  runSequence(`build.${ENV}`,
+  runSequence(`build.dev`,
               'server.start',
               'watch.serve',
               done));

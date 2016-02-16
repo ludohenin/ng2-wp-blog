@@ -3,8 +3,8 @@ import {Component, ViewEncapsulation} from 'angular2/core';
 
 @Component({
   selector: 'disqus',
-  templateUrl: './components/blog/components/disqus/disqus.html',
-  styleUrls: ['./components/blog/components/disqus/disqus.css'],
+  templateUrl: './disqus.html',
+  styleUrls: ['./disqus.css'],
   encapsulation: ViewEncapsulation.None,
   properties: ['post']
 })

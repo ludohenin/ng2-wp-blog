@@ -1,5 +1,4 @@
 {
-    "version": "1.7.3",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -12,7 +11,9 @@
         "sourceMap": true
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "typings/browser.d.ts",
+        "typings/browser/**"
     ],
     "compileOnSave": false
 }
