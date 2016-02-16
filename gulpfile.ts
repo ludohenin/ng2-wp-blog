@@ -36,6 +36,7 @@ gulp.task('build.prod', done =>
               'clean.tmp',
               'tslint',
               'build.assets.prod',
+              'copy.fonts.prod',
               'build.html_css.prod',
               'build.js.prod',
               'build.bundles',

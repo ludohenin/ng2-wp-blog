@@ -76,8 +76,7 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'angular2/bundles/angular2.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST },
-  { src: 'materialize-css/dist/css/materialize.min.css', inject: true, dest: CSS_DEST },
-  { src: 'node_modules/materialize-css/dist/font/**/*', dest: FONTS_DEST }
+  { src: 'materialize-css/dist/css/materialize.min.css', inject: true, dest: CSS_DEST }
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
@@ -86,8 +85,7 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
   { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
   { src: 'systemjs/dist/system.js', inject: 'shims' },
   { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'libs' },
-  { src: 'materialize-css/dist/css/materialize.min.css', inject: true, dest: CSS_DEST },
-  { src: 'node_modules/materialize-css/dist/font/**/*', dest: FONTS_DEST }
+  { src: 'materialize-css/dist/css/materialize.min.css', inject: true, dest: CSS_DEST }
 ]);
 
 // Declare local files that needs to be injected
@@ -95,6 +93,10 @@ export const APP_ASSETS: InjectableDependency[] = [
   { src: `${ASSETS_SRC}/prism.min.js`,  inject: 'libs', dest: LIB_DEST },
   { src: `${ASSETS_SRC}/prism.css`, inject: true, dest: CSS_DEST },
   { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
+];
+
+export const FONTS_SRC = [
+  'node_modules/materialize-css/dist/font/**/*'
 ];
 
 
