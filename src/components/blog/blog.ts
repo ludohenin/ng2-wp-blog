@@ -17,11 +17,11 @@ import {
 } from './services/services';
 import {BLOG_DIRECTIVES} from './directives/directives';
 
-import * as CONFIG from '../../config';
+import {APP_CONFIG} from '../../config';
 
 const WpResourceCustomConfig = {
-  urlRoot: CONFIG.default.WP_API_ROOT,
-  namespace: CONFIG.default.WP_API_NAMESPACE,
+  urlRoot: APP_CONFIG.WP_API_ROOT,
+  namespace: APP_CONFIG.WP_API_NAMESPACE,
   request: {
     search: {
       per_page: 5,
