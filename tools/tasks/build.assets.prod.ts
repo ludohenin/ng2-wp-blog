@@ -17,7 +17,7 @@ export = function buildAssetsDev(gulp, plugins) {
     return gulp.src([
         join(APP_SRC, '**'),
         '!' + join(APP_SRC, '**', '*.ts'),
-        '!' + join(APP_SRC, '**', '*.css'),
+        '!' + join(APP_SRC, 'components', '**', '*.css'),
         '!' + join(APP_SRC, '**', '*.html'),
       ])
       .pipe(onlyDirs(es))

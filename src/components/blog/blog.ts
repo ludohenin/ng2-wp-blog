@@ -68,6 +68,5 @@ export class BlogCmp {
     this.wp.users.init();
     this.wp.terms.categories.init();
     this.wp.terms.tags.init();
-    console.log(this);
   }
 }

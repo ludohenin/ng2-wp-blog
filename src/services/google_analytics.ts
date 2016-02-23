@@ -17,8 +17,6 @@ export class GoogleAnalyticsService {
   }
   track(path) {
     let fullpath = (this.base.replace(/\/$/, '')) + (/^\//.test(path) ? path :  `/${path}`);
-    console.log(path);
-    console.log(fullpath);
     this.ga('send', 'pageview', fullpath);
   }
 }
