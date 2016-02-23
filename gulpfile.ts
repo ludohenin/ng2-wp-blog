@@ -24,7 +24,7 @@ gulp.task('build.dev', done =>
               done));
 
 gulp.task('build.wp', done =>
-  runSequence('clean.wp',
+  runSequence('clean.dist',
               'build.prod',
               'copy2wp',
               done));

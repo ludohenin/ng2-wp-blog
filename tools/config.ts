@@ -28,7 +28,7 @@ export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'ma
 export const APP_TITLE            = 'My Angular2 App';
 
 export const WP_DIR               = '../../Sites/wp-3dots-blog/wp-content/themes/angular2';
-export const ASSETS_PATH_PREFIX   = `${APP_BASE}wp-content/themes/angular2`;
+export const ASSETS_PATH_PREFIX   = ENV === 'dev' ? '' : `${APP_BASE}wp-content/themes/angular2`;
 
 export const APP_SRC              = 'src';
 export const TEST_SRC             = 'src';

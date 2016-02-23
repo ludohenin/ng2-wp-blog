@@ -6,15 +6,8 @@
     "url": "https://github.com/mgechev/angular2-seed"
   },
   "scripts": {
-    "build.dev": "gulp build.dev",
-    "build.dev.watch": "gulp build.dev.watch",
-    "serve.dev": "gulp serve --env dev",
-
-    "build.wp": "gulp build.wp --env prod --app-env dev --dest wp_dev --base /wp-3dots-blog/",
+    "build.wp": "gulp build.wp --env prod --app-env dev --dest dev --base /wp-3dots-blog/",
     "serve.wp": "gulp open --port 8888",
-
-    "build.preprod": "gulp build.prod --env prod --app-env dev --dest preprod",
-    "serve.preprod": "http-server ./dist/preprod -p 5556 -o",
 
     "build.stage": "gulp build.prod --env prod --app-env dev --dest stage --base /wp-blog-test/",
     "stage": "rsync -r --verbose --delete-before ./dist/stage/ root@3dots.io:/var/www/wp-blog-test/wp-content/themes/angular2/",
@@ -31,7 +24,7 @@
     "lint": "gulp tslint",
     "postinstall": "typings install && gulp check.versions && npm prune",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
-    "start": "gulp serve --env dev",
+    "start": "gulp serve --env dev --app-env prod",
     "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
     "tsd": "tsd"

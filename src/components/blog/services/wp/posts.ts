@@ -36,16 +36,16 @@ export class PostModel extends WpModel {
     if (this._tags) { return this._tags; }
 
     let tagTaxonomy = this.config.taxonomy.tag;
-    this._embedded['http://api.w.org/term'].forEach(terms => {
-      if (isArray(terms)) {
-        terms.forEach(term => {
-          if (term.taxonomy === tagTaxonomy) {
-            this._tags = this._tags || [];
-            this.tags.push(term);
-          }
-        });
-      }
-    });
+    // this._embedded['https://api.w.org/term'].forEach(terms => {
+    //   if (isArray(terms)) {
+    //     terms.forEach(term => {
+    //       if (term.taxonomy === tagTaxonomy) {
+    //         this._tags = this._tags || [];
+    //         this.tags.push(term);
+    //       }
+    //     });
+    //   }
+    // });
     return this._tags;
   }
 }
