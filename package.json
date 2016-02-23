@@ -16,11 +16,11 @@
     "build.preprod": "gulp build.prod --env prod --app-env dev --dest preprod",
     "serve.preprod": "http-server ./dist/preprod -p 5556 -o",
 
-    "build.stage": "gulp build.prod --env prod --app-env dev --dest stage --base /blog_stage/",
-    "stage": "rsync -r --verbose ./dist/stage/ root@3dots.io:/var/www/blog_stage/",
+    "build.stage": "gulp build.prod --env prod --app-env dev --dest stage --base /wp-blog-test/",
+    "stage": "rsync -r --verbose --delete-before ./dist/stage/ root@3dots.io:/var/www/wp-blog-test/wp-content/themes/angular2/",
 
     "build.prod": "gulp build.prod --env prod --dest prod --base /blog/",
-    "deploy": "rsync -r --verbose ./dist/prod/ root@3dots.io:/var/www/blog/",
+    "deploy": "rsync -r --verbose --delete-before ./dist/prod/ root@3dots.io:/var/www/blog/wp-content/themes/angular2/",
 
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",

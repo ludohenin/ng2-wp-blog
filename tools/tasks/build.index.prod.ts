@@ -3,6 +3,7 @@ import {templateLocals} from '../utils';
 import {
   APP_SRC,
   APP_DEST,
+  ASSETS_PATH_PREFIX,
   CSS_DEST,
   JS_DEST,
   CSS_PROD_BUNDLE,
@@ -26,7 +27,7 @@ export = function buildIndexProd(gulp, plugins) {
       }), {
         transform: function (filepath) {
           let path = normalize(filepath).split(sep);
-          arguments[0] = path.slice(path.length - 2, path.length).join(sep) + `?${Date.now()}`;
+          arguments[0] = join(ASSETS_PATH_PREFIX, path.slice(path.length - 2, path.length).join(sep) + `?${Date.now()}`);
           return plugins.inject.transform.apply(plugins.inject.transform, arguments);
         }
       });

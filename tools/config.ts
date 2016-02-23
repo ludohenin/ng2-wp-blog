@@ -15,6 +15,7 @@ export const PORT                 = argv['port']        || 5555;
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = getEnvironment();
 export const APP_ENV              = argv['app-env']     || ENV;
+export const DEST                 = argv['dest']        || ENV;
 export const DEBUG                = argv['debug']       || false;
 export const DOCS_PORT            = argv['docs-port']   || 4003;
 export const APP_BASE             = argv['base']        || '/';
@@ -27,7 +28,7 @@ export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'ma
 export const APP_TITLE            = 'My Angular2 App';
 
 export const WP_DIR               = '../../Sites/wp-3dots-blog/wp-content/themes/angular2';
-export const ASSETS_PATH_PREFIX   = ''; //'wp-content/themes/angular2';
+export const ASSETS_PATH_PREFIX   = `${APP_BASE}wp-content/themes/angular2`;
 
 export const APP_SRC              = 'src';
 export const TEST_SRC             = 'src';
@@ -38,7 +39,7 @@ export const TMP_DIR              = 'tmp';
 export const TEST_SPEC_DEST       = 'dist/test/spec';
 export const TEST_E2E_DEST        = 'dist/test/e2e';
 export const DOCS_DEST            = 'docs';
-export const APP_DEST             = `dist/${ENV}`;
+export const APP_DEST             = `dist/${DEST}`;
 export const BUNDLES_DEST         = `${APP_DEST}/bundles`;
 export const CSS_DEST             = `${APP_DEST}/css`;
 export const JS_DEST              = `${APP_DEST}/js`;
