@@ -13,7 +13,7 @@
         </span>
     </div>
     <div>
-      <i class="material-icons tiny">date_range</i> {{ post.date }}
+      <i class="material-icons tiny">date_range</i> {{ post.date | moment: 'MMMM Do YYYY' }}
       <!--<i class="material-icons orange-text text-darken-1 tiny">update</i> {{ post.modified | date: 'longDate' }}-->
     </div>
   </section>
