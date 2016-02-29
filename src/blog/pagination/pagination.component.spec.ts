@@ -9,7 +9,7 @@ import {
 import {Component, View} from 'angular2/core';
 
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {PaginationComponent} from './pagination';
+import {PaginationComponent} from './pagination.component';
 
 export function main() {
 

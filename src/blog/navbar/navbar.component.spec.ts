@@ -13,7 +13,7 @@ import {SpyLocation} from 'angular2/src/mock/location_mock';
 import {RootRouter} from 'angular2/src/router/router';
 
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {NavbarComponent} from './navbar';
+import {NavbarComponent} from './navbar.component';
 
 export function main() {
 

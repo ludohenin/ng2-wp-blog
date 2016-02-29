@@ -9,7 +9,7 @@ import {
 import {Component, View} from 'angular2/core';
 
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {DisqusComponent} from './disqus';
+import {DisqusComponent} from './disqus.component';
 
 export function main() {
 

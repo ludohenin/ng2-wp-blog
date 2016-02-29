@@ -9,7 +9,7 @@ import {
 import {Component, View} from 'angular2/core';
 
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {PostComponent} from './post';
+import {PostComponent} from './post.component';
 
 export function main() {
 
