@@ -1,13 +1,13 @@
 import {Component, provide, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {NavbarComponent} from '../navbar/navbar.component';
 import {PostComponent} from '../post/post.component';
 import {PostsComponent} from '../posts/posts.component';
+import {PreloaderComponent} from '../preloader/preloader.component';
 
 import {
-  SERVICE_PROVIDERS,
+  WP_SERVICE_PROVIDERS,
   ApiService,
   WpService,
   WpResourceConfig,
@@ -39,8 +39,7 @@ const WpModelFactoryDef = {
 // Configuration.
 // NOTE: Order is important here.
 export const BLOG_PROVIDERS = [
-  HTTP_PROVIDERS,
-  SERVICE_PROVIDERS,
+  WP_SERVICE_PROVIDERS,
   provide(WpResourceConfig, { useValue: WpResourceCustomConfig}),
   provide(WpModelFactory, WpModelFactoryDef)
 ];
@@ -52,7 +51,7 @@ export const BLOG_PROVIDERS = [
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, NavbarComponent]
+  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, NavbarComponent, PreloaderComponent]
 })
 @RouteConfig([
   { path: '/', component: PostsComponent, as: 'PostsHome' },
@@ -61,11 +60,17 @@ export const BLOG_PROVIDERS = [
 ])
 export class BlogComponent {
   site: RootModel;
+  activatePreloader: boolean = false;
   constructor(public wp: WpService) {
     this.site = this.wp.root;
     this.site.get();
     this.wp.posts.init();
     this.wp.users.init();
+
+    this.wp.posts.loading.subscribe(val => {
+      this.activatePreloader = val;
+    });
+
     // this.wp.terms.categories.init();
     // this.wp.terms.tags.init();
   }

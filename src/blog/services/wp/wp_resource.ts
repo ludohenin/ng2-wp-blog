@@ -84,13 +84,13 @@ export class WpModel {
 }
 
 // Token only.
-export class WpModelFactory {
-  getModelInstance(ctor: any): any {/** */}
+export abstract class WpModelFactory {
+  abstract createModelInstance(ctor: any): any
 }
 
-class WpModelFactoryImpl {
+class WpModelFactoryImpl implements WpModelFactory {
   constructor(public deps: any[]) {}
-  getModelInstance(ctor: any): any {
+  createModelInstance(ctor: any): any {
     return new ctor(...this.deps);
   };
 }
@@ -112,17 +112,25 @@ export class WpCollection<T extends WpModel> extends Array {
   modelToken: any;
   totalItems: number;
   totalPages: number;
-  constructor(public api: ApiService, public config: WpResourceConfig, public modelFactory: WpModelFactory) {
+
+  loading: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(public api: ApiService,
+              public config: WpResourceConfig,
+              public modelFactory: WpModelFactory) {
     super();
     this._mergeConfig();
     mapFromConfig(this, this.config);
   }
   init(): WpCollection<T> {
     if (this.initialized) { return this; }
+    this.loading.next(true);
+
     this.getPage().subscribe(res => {
       this.totalItems = parseInt(res.raw.headers.get('x-wp-total'));
       this.totalPages = parseInt(res.raw.headers.get('x-wp-totalpages'));
       this.initialized = true;
+      this.loading.next(false);
     });
     return this;
   }
@@ -137,8 +145,12 @@ export class WpCollection<T extends WpModel> extends Array {
     if (model) {
       this.async(() => request.next(model));
     } else {
-      let model = this.modelFactory.getModelInstance(this.modelToken);
-      model.get(id).subscribe(type => request.next(type));
+      let model = this.modelFactory.createModelInstance(this.modelToken);
+      this.loading.next(true);
+      model.get(id).subscribe(type => {
+        request.next(type);
+        this.loading.next(false);
+      });
     }
 
     return request;
@@ -156,6 +168,7 @@ export class WpCollection<T extends WpModel> extends Array {
   //TODO: Update return type acc to apiResponse object type ({data, raw}).
   getList(searchParams: URLSearchParams): EventEmitter<T[]> {
     let request = new EventEmitter();
+    this.loading.next(true);
 
     this.api.request({
       // TODO: Refactor.
@@ -165,6 +178,7 @@ export class WpCollection<T extends WpModel> extends Array {
       let collection = this._mapCollection(res.json());
       // Refactor to provide request as well.
       request.next({data: collection, raw: res});
+      this.loading.next(false);
     });
 
     return request;
@@ -179,7 +193,7 @@ export class WpCollection<T extends WpModel> extends Array {
         // Update the cached object with the fetch one.
         return cachedModel.set(rawModel);
       } else {
-        let model = this.modelFactory.getModelInstance(this.modelToken);
+        let model = this.modelFactory.createModelInstance(this.modelToken);
         this.push(model.set(rawModel));
         model.set({ parent: this });
         return model;

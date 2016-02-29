@@ -1,4 +1,6 @@
 <navbar [siteName]="site.name"></navbar>
 <div class="container">
+  <preloader *ngIf="activatePreloader"></preloader>
+
   <router-outlet></router-outlet>
 </div>
