@@ -1,7 +1,8 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component, OnDestroy, ViewEncapsulation} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
+import {Subscription} from 'rxjs';
 
-import {WpService, PostModel} from '../services/wp.service';
+import {WpService, PostsCollection, PostModel} from '../services/wp.service';
 import {BLOG_DIRECTIVES} from '../directives/blog.directives';
 import {PaginationComponent} from '../pagination/pagination.component';
 
@@ -14,9 +15,10 @@ import {PaginationComponent} from '../pagination/pagination.component';
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, PaginationComponent]
 })
-export class PostsComponent {
+export class PostsComponent implements OnDestroy {
   posts: PostModel[];
   activePage: number;
+  subscription: Subscription<PostsCollection>;
   constructor(public wp: WpService, routeParams: RouteParams) {
     let id = routeParams.get('id');
     this.activePage = (id ? parseInt(id) : 0) || 1;
@@ -24,10 +26,13 @@ export class PostsComponent {
   }
   loadPage(id: number): void {
     this.activePage = id;
-    this.wp.posts
+    this.subscription = this.wp.posts
       .getPage(id)
       .subscribe(res => {
         this.posts = res.data;
       });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

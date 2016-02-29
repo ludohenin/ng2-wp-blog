@@ -54,7 +54,7 @@ export class PostModel extends WpModel {
 export class PostsCollection extends WpCollection<PostModel> {
   modelToken = PostModel;
   url = '/posts';
-  constructor(public api: ApiService, public config: WpResourceConfig, modelFactory: WpModelFactory) {
+  constructor(api: ApiService, config: WpResourceConfig, modelFactory: WpModelFactory) {
     super(api, config, modelFactory);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, ViewEncapsulation} from 'angular2/core';
+import {Component, EventEmitter, Output, ViewEncapsulation} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
 
@@ -9,13 +9,12 @@ import {RouterLink} from 'angular2/router';
   styleUrls: ['./pagination.component.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [RouterLink],
-  properties: ['activePage', 'totalPages'],
-  events: ['changePage']
+  properties: ['activePage', 'totalPages']
 })
 export class PaginationComponent {
   activePage: number;
   pages: number[];
-  changePage: EventEmitter<number> = new EventEmitter();
+  @Output() changePage: EventEmitter<number> = new EventEmitter();
   set totalPages(val: number) {
     this.pages = this.makeArray(val);
   }

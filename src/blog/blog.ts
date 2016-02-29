@@ -1,5 +1,3 @@
-import {ExcerptDirective} from './directives/excerpt.directive';
-
 export {BlogComponent} from './blog/blog.component';
 export {DisqusComponent} from './disqus/disqus.component';
 export {NavbarComponent} from './navbar/navbar.component';
@@ -10,4 +8,4 @@ export {PostsComponent} from './posts/posts.component';
 export * from './services/wp.service';
 
 export {ExcerptDirective} from './directives/excerpt.directive';
-export const BLOG_DIRECTIVES = [ExcerptDirective];
+export {BLOG_DIRECTIVES} from './directives/blog.directives';
