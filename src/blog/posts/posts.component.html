@@ -24,6 +24,6 @@
 <pagination class="center-align"
             *ngIf="posts"
             [activePage]="activePage"
-            (changePage)="loadPage($event)"
+            (changePage)="navigatePage($event)"
             [totalPages]="wp.posts.totalPages">
 </pagination>

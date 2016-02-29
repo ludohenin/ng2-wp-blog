@@ -2,13 +2,13 @@
   <li class="waves-effect" [ngClass]="{disabled: activePage == 1}">
     <a href="#" (click)="previousPage()"><i class="material-icons">chevron_left</i></a>
   </li>
-  
+
   <li class="waves-effect"
       *ngFor="#page of pages"
       [ngClass]="{'active blue': activePage == page}">
     <a href="#" (click)="showPage(page)">{{ page }}</a>
   </li>
-  
+
   <li class="waves-effect" [ngClass]="{disabled: activePage == pages.length}">
     <a href="#" (click)="nextPage()"><i class="material-icons">chevron_right</i></a>
   </li>
