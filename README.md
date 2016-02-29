@@ -1,66 +1,79 @@
 # ng2-wp-blog
 
-WIP
+Angular2 application using Wordpress [JSON-API](http://v2.wp-api.org) backend.
 
-# src folder structure
+It can be served as WP theme or from a seperate static files server.
+
+## src folder structure
 
 ```bash
-.
+./src
+├── app
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   └── app.ts
 ├── assets
 │   ├── main.css
 │   ├── prism.css
 │   └── prism.min.js
-├── bootstrap.ts
-├── components
-│   ├── app
-│   │   ├── app.css
-│   │   ├── app.html
-│   │   ├── app.ts
-│   │   └── app_spec.ts
-│   └── blog
-│       ├── blog.css
-│       ├── blog.html
-│       ├── blog.ts
-│       ├── blog_spec.ts
-│       ├── components
-│       │   ├── disqus
-│       │   │   ├── disqus.css
-│       │   │   ├── disqus.html
-│       │   │   ├── disqus.ts
-│       │   │   └── disqus_spec.ts
-│       │   ├── navbar
-│       │   │   ├── navbar.css
-│       │   │   ├── navbar.html
-│       │   │   ├── navbar.ts
-│       │   │   └── navbar_spec.ts
-│       │   ├── pagination
-│       │   │   ├── pagination.css
-│       │   │   ├── pagination.html
-│       │   │   ├── pagination.ts
-│       │   │   └── pagination_spec.ts
-│       │   ├── post
-│       │   │   ├── post.css
-│       │   │   ├── post.html
-│       │   │   ├── post.ts
-│       │   │   └── post_spec.ts
-│       │   └── posts
-│       │       ├── posts.css
-│       │       ├── posts.html
-│       │       ├── posts.ts
-│       │       └── posts_spec.ts
-│       ├── directives
-│       │   ├── directives.ts
-│       │   └── excerpt.ts
-│       └── services
-│           ├── services.ts
-│           └── wp
-│               ├── posts.ts
-│               ├── root.ts
-│               ├── terms.ts
-│               ├── users.ts
-│               ├── wp.ts
-│               ├── wp_resource.ts
-│               └── xhr.ts
+├── blog
+│   ├── blog
+│   │   ├── blog.component.css
+│   │   ├── blog.component.html
+│   │   ├── blog.component.spec.ts
+│   │   └── blog.component.ts
+│   ├── directives
+│   │   ├── blog.directives.ts
+│   │   └── excerpt.directive.ts
+│   ├── disqus
+│   │   ├── disqus.component.css
+│   │   ├── disqus.component.html
+│   │   ├── disqus.component.spec.ts
+│   │   └── disqus.component.ts
+│   ├── navbar
+│   │   ├── navbar.component.css
+│   │   ├── navbar.component.html
+│   │   ├── navbar.component.spec.ts
+│   │   └── navbar.component.ts
+│   ├── pagination
+│   │   ├── pagination.component.css
+│   │   ├── pagination.component.html
+│   │   ├── pagination.component.spec.ts
+│   │   └── pagination.component.ts
+│   ├── post
+│   │   ├── post.component.css
+│   │   ├── post.component.html
+│   │   ├── post.component.spec.ts
+│   │   └── post.component.ts
+│   ├── posts
+│   │   ├── posts.component.css
+│   │   ├── posts.component.html
+│   │   ├── posts.component.spec.ts
+│   │   └── posts.component.ts
+│   ├── services
+│   │   ├── wp
+│   │   │   ├── posts.ts
+│   │   │   ├── root.ts
+│   │   │   ├── terms.ts
+│   │   │   ├── users.ts
+│   │   │   ├── wp.ts
+│   │   │   ├── wp_resource.ts
+│   │   │   └── xhr.ts
+│   │   └── wp.service.ts
+│   └── blog.ts
+├── shared
+│   ├── pipes
+│   │   └── moment.pipe.ts
+│   ├── services
+│   │   └── google_analytics.service.ts
+│   ├── pipes.ts
+│   └── services.ts
 ├── config.ts
-└── index.html
+├── index.html
+├── index.php
+├── main.ts
+├── screenshot.png
+└── style.css
 ```
