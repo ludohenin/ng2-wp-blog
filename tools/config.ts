@@ -25,7 +25,7 @@ export const HOT_LOADER_PORT      = 5578;
 
 export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main';
 
-export const APP_TITLE            = 'My Angular2 App';
+export const APP_TITLE            = ENV === 'dev' ? '3dots.io blog [TEST]' : '3dots.io blog';
 
 export const WP_DIR               = '../../Sites/wp-3dots-blog/wp-content/themes/angular2';
 export const ASSETS_PATH_PREFIX   = ENV === 'dev' ? '' : `${APP_BASE}wp-content/themes/angular2`;
@@ -116,12 +116,13 @@ const SYSTEM_CONFIG_DEV = {
     'config': `${APP_ROOT}config`,
     'angular2/*': `${APP_BASE}angular2/*`,
     'rxjs/*': `${APP_BASE}rxjs/*`,
-    'lodash': `${APP_BASE}node_modules/lodash/lodash`,
     '*': `${APP_BASE}node_modules/*`
   },
   packages: {
     angular2: { defaultExtension: false },
-    rxjs: { defaultExtension: false }
+    rxjs: { defaultExtension: false },
+    moment: { main: 'moment.js' },
+    lodash: { main: 'lodash.js' }
   }
 };
 
@@ -132,6 +133,12 @@ export const SYSTEM_BUILDER_CONFIG = {
   paths: {
     'tmp/*': 'tmp/*',
     '*': 'node_modules/*'
+  },
+  packages: {
+    angular2: { defaultExtension: false },
+    rxjs: { defaultExtension: false },
+    moment: { main: 'moment.js' },
+    lodash: { main: 'lodash.js' }
   }
 };
 
