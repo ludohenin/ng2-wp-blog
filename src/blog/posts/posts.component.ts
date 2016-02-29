@@ -1,5 +1,5 @@
 import {Component, OnDestroy, ViewEncapsulation} from 'angular2/core';
-import {Location, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
+import {Router, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 import {Subscription} from 'rxjs';
 
 import {WpService, PostsCollection, PostModel} from '../services/wp.service';
@@ -20,7 +20,7 @@ export class PostsComponent implements OnDestroy {
   activePage: number;
   subscription: Subscription<PostsCollection>;
   constructor(public wp: WpService,
-              public location: Location,
+              public router: Router,
               routeParams: RouteParams) {
     let id = routeParams.get('id');
     this.activePage = (id ? parseInt(id) : 0) || 1;
@@ -36,8 +36,8 @@ export class PostsComponent implements OnDestroy {
       });
   }
   navigatePage(id) {
-    this.location.go(`/page/${id}`);
-    this.loadPage(id);
+    let instruction = this.router.generate(['../PostsPage', { id: id }]);
+    this.router.navigateByInstruction(instruction);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
