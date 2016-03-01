@@ -3,7 +3,7 @@ import {Router, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 import {Subscription} from 'rxjs';
 
 import {WpService, PostsCollection, PostModel} from '../services/wp.service';
-import {BLOG_DIRECTIVES} from '../directives/blog.directives';
+import {ExcerptComponent} from '../excerpt/excerpt.component';
 import {PaginationComponent} from '../pagination/pagination.component';
 
 @Component({
@@ -13,7 +13,7 @@ import {PaginationComponent} from '../pagination/pagination.component';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, PaginationComponent]
+  directives: [ROUTER_DIRECTIVES, ExcerptComponent, PaginationComponent]
 })
 export class PostsComponent implements OnDestroy {
   posts: PostModel[];

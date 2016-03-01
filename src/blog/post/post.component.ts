@@ -3,7 +3,6 @@ import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 import {Subscription} from 'rxjs';
 
 import {WpService, PostModel} from '../services/wp.service';
-import {BLOG_DIRECTIVES} from '../directives/blog.directives';
 import {DisqusComponent} from '../disqus/disqus.component';
 
 @Component({
@@ -13,7 +12,7 @@ import {DisqusComponent} from '../disqus/disqus.component';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, DisqusComponent]
+  directives: [ROUTER_DIRECTIVES, DisqusComponent]
 })
 export class PostComponent implements AfterViewChecked, OnDestroy {
   post: PostModel;

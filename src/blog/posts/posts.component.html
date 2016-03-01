@@ -3,7 +3,7 @@
     <h4><a [routerLink]="['../PostPage', { id: post.id }]">{{ post.title.rendered }}</a></h4>
   </header>
 
-  <section class="flow-text" [excerpt]="post.content.rendered"></section>
+  <excerpt class="flow-text" [excerptContent]="post.excerpt.rendered"></excerpt>
 
   <section class="grey-text">
     <div *ngIf="post.tags">

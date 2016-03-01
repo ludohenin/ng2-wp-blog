@@ -15,7 +15,6 @@ import {
   WpModelFactory,
   makeModelFactory
 } from '../services/wp.service';
-import {BLOG_DIRECTIVES} from '../directives/blog.directives';
 
 import {APP_CONFIG} from '../../config';
 
@@ -51,7 +50,7 @@ export const BLOG_PROVIDERS = [
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, BLOG_DIRECTIVES, NavbarComponent, PreloaderComponent]
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, PreloaderComponent]
 })
 @RouteConfig([
   { path: '/', component: PostsComponent, as: 'PostsHome' },
