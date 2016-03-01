@@ -5,7 +5,7 @@ import {Component, Input, ViewEncapsulation} from 'angular2/core';
   selector: 'excerpt',
   moduleId: module.id,
   template: '<div [innerHtml]="excerptContent"></div>',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class ExcerptComponent {
   @Input() excerptContent: string;
