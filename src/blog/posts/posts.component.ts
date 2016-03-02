@@ -36,8 +36,7 @@ export class PostsComponent implements OnDestroy {
       });
   }
   navigatePage(id) {
-    let instruction = this.router.generate(['../PostsPage', { id: id }]);
-    this.router.navigateByInstruction(instruction);
+    this.router.navigate(['../PostsPage', { id: id }]);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
