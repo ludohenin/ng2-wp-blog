@@ -77,3 +77,7 @@ It can be served as WP theme or from a seperate static files server.
 ├── screenshot.png
 └── style.css
 ```
+
+## Contributors
+
+![Contributors](https://webtask.it.auth0.com/api/run/wt-ludovic_henin-yahoo_com-0/contributors/ludohenin/ng2-wp-blog.svg)
