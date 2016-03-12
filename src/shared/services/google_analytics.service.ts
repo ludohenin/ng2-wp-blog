@@ -7,7 +7,7 @@ export class GoogleAnalyticsService {
   base: string = '';
   ga: any;
   constructor(public router: Router) {
-    this.ga = (<any>window).ga;
+    this.initializeGaFunction();
     this.init(APP_CONFIG.GA_ID, '/blog/');
     router.subscribe(this.track.bind(this));
   }
@@ -18,5 +18,13 @@ export class GoogleAnalyticsService {
   track(path) {
     let fullpath = (this.base.replace(/\/$/, '')) + (/^\//.test(path) ? path :  `/${path}`);
     this.ga('send', 'pageview', fullpath);
+  }
+  initializeGaFunction() {
+    const w = (<any>window);
+    w.ga = w.ga || function() {
+      (w.ga.q = w.ga.q || []).push(arguments)
+    };
+    w.ga.l =+ new Date();
+    this.ga = w.ga;
   }
 }
