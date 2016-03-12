@@ -42,13 +42,10 @@ export class ProjectConfig extends SeedConfig {
     'node_modules/materialize-css/dist/font/**/*'
   ];
 
-  SYSTEM_CONFIG_DEV = {
-  defaultJSExtensions: true,
+  SYSTEM_CONFIG_DEV: any = {
+    defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      'config': `${this.APP_ROOT}config`,
-      'angular2/*': `${this.APP_BASE}angular2/*`,
-      'rxjs/*': `${this.APP_BASE}rxjs/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
     packages: {
